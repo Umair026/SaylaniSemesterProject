@@ -55,7 +55,7 @@
 
     <RelativeLayout
         android:id="@+id/layout_signup"
-        android:visibility="visible"
+        android:visibility="gone"
         android:background="#fff"
         android:gravity="center_horizontal|center_vertical"
         android:layout_width="match_parent"

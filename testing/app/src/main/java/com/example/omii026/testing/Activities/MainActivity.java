@@ -113,6 +113,8 @@ public class MainActivity extends ActionBarActivity {
         ((Button) findViewById(R.id.signin)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog =  ProgressDialog.show(MainActivity.this,"Creating User","Loading..",true,false);
+
                 l_Email = loginEmail.getText().toString();
                 l_Password = loginPassword.getText().toString();
                 Toast.makeText(MainActivity.this,"l_Email:"+l_Email+"l_Password:"+l_Password,Toast.LENGTH_SHORT).show();
@@ -124,10 +126,10 @@ public class MainActivity extends ActionBarActivity {
                                     @Override
                                     public void onAuthenticated(AuthData authData) {
                                         Toast.makeText(MainActivity.this, "auth id-> " + authData.getUid(), Toast.LENGTH_SHORT).show();
-
+                                        progressDialog.dismiss();
                                         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                                         startActivity(intent);
-//
+
                                     }
 
                                     @Override
