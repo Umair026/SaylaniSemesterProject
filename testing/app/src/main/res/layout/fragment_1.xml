@@ -1,0 +1,18 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#ff5"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.omii026.me.Fragments.Fragment1">
+
+
+        <TextView
+        android:gravity="center_vertical|center_horizontal"
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>
