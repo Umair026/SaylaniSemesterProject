@@ -1,7 +1,5 @@
 package com.example.omii026.testing.Firebase;
 
-import android.util.Log;
-
 import com.firebase.client.Firebase;
 
 /**
@@ -16,14 +14,12 @@ public class FireBaseHandler {
 
     public static FireBaseHandler getInstance(){
         if(ourReference == null){
-            Log.d("test","getInstance");
             ourReference = new FireBaseHandler();
         }
         return ourReference;
     }
 
     public FireBaseHandler(){
-        Log.d("test","ref_get");
 //        mFirebaseRef = new Firebase(Configuration.FIREBASE_URL);
         mFirebaseRef = new Firebase("https://tvv.firebaseio.com/");
     }
@@ -32,7 +28,6 @@ public class FireBaseHandler {
         return mFirebaseRef.child(child);
     }
     public Firebase getRootFirebaseRef(){
-        Log.d("test","getRootFirebaseRef");
         return mFirebaseRef;
     }
 

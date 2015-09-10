@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#fff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/toolbar_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/toolbar_bg"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/Base.Theme.AppCompat">
+
+        <ImageView
+            android:layout_alignParentLeft="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/ic_back_gallery"
+            android:background="@drawable/ic_keyboard_arrow_left_white_24dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/title_appbar"
+            android:text="Chat (Group)"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/ic_attach"
+            android:background="@drawable/ic_attach_file_white_18dp"
+            />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/groupChatList"
+        android:layout_below="@id/toolbar_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <View
+        android:id="@+id/view_gallery"
+        android:layout_below="@id/toolbar_gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="7dp"
+        android:background="@drawable/view_drawable"/>
+
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:background="#f75"
+        android:orientation="horizontal"
+        android:id="@+id/chat_textArea"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <EditText
+            android:layout_marginTop="5dp"
+            android:background="@android:drawable/divider_horizontal_dim_dark"
+            android:hint="      Text message"
+            android:id="@+id/chat_Text"
+            android:lines="3"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:layout_toLeftOf="@+id/chat_sent"
+            android:layout_toRightOf="@+id/chat_emotions"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <ImageView
+            android:layout_marginTop="8dp"
+            android:id="@+id/chat_sent"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_play_arrow_white_24dp"
+            android:layout_width="50dp"
+            android:layout_height="40dp" />
+
+        <ImageView
+            android:layout_marginTop="8dp"
+            android:id="@+id/chat_emotions"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/ic_favorite_border_white_24dp"
+            android:layout_width="50dp"
+            android:layout_height="40dp" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

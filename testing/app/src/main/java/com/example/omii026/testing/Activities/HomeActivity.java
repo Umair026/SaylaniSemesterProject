@@ -16,30 +16,39 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.omii026.testing.Fragments.FindFriends;
 import com.example.omii026.testing.Fragments.Friends;
 import com.example.omii026.testing.Fragments.Gallery;
+import com.example.omii026.testing.Fragments.GroupChatFragment;
 import com.example.omii026.testing.Fragments.Groups;
 import com.example.omii026.testing.Fragments.Home;
 import com.example.omii026.testing.Fragments.MusicPlayer;
 import com.example.omii026.testing.R;
 
+import java.security.acl.Group;
+
 public class HomeActivity extends ActionBarActivity implements
-        NavigationDrawerFragment.NavigationDrawerCallbacks {
+        NavigationDrawerFragment.NavigationDrawerCallbacks,
+        Home.onFragmentInteractionListener,
+        Groups.OnFragmentInteractionListener
+
+{
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+    private  NavigationDrawerFragment mNavigationDrawerFragment;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
-
-    private FragmentManager mFragmentManager = getSupportFragmentManager();
+private static DrawerLayout mDrawerLayout;
+//    private FragmentManager mFragmentManager = getSupportFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +64,18 @@ public class HomeActivity extends ActionBarActivity implements
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
     }
-
+    public void openDrawer(){
+        mDrawerLayout.openDrawer(mDrawerLayout);
+    }
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+//                .commit();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container,new Home())
                 .commit();
     }
 
@@ -79,6 +93,7 @@ public class HomeActivity extends ActionBarActivity implements
 
     @Override
     public void onGroupClick(String Item) {
+        FragmentManager mFragmentManager = getSupportFragmentManager();
             mFragmentManager.beginTransaction()
                     .add(R.id.container, Groups.newInstance(Item))
                     .addToBackStack(null).commit();
@@ -88,7 +103,7 @@ public class HomeActivity extends ActionBarActivity implements
 
     @Override
     public void onFriendsClick(String Item) {
-
+        FragmentManager mFragmentManager = getSupportFragmentManager();
             mFragmentManager.beginTransaction()
                     .add(R.id.container, Friends.newInstance(Item))
                     .addToBackStack(null).commit();
@@ -102,29 +117,26 @@ public class HomeActivity extends ActionBarActivity implements
 
     @Override
     public void onFindFriendsClick(String Item) {
-
+        FragmentManager mFragmentManager = getSupportFragmentManager();
             mFragmentManager.beginTransaction()
-                    .add(R.id.container, FindFriends.newInstance(Item))
+                    .add(R.id.container, new FindFriends())
                     .addToBackStack(null).commit();
-
     }
 
     @Override
     public void onMusicPlayerClick(String Item) {
-
+        FragmentManager mFragmentManager = getSupportFragmentManager();
             mFragmentManager.beginTransaction()
                     .add(R.id.container, MusicPlayer.newInstance(Item))
                     .addToBackStack(null).commit();
-
     }
 
     @Override
     public void onGalleryClick(String Item) {
-
+        FragmentManager mFragmentManager = getSupportFragmentManager();
             mFragmentManager.beginTransaction()
-                    .add(R.id.container, Gallery.newInstance(Item))
+                    .add(R.id.container,new Gallery())
                     .addToBackStack(null).commit();
-
     }
 
     @Override
@@ -182,6 +194,18 @@ public class HomeActivity extends ActionBarActivity implements
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void UserFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.container,new FindFriends()).addToBackStack(null).commit();
+    }
+
+    @Override
+    public void OpenGroupChatFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.container, GroupChatFragment.newInstance("Group","Group")).addToBackStack(null).commit();
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -190,7 +214,15 @@ public class HomeActivity extends ActionBarActivity implements
          * The fragment argument representing the section number for this
          * fragment.
          */
+        private onFragmentInteractionListener mListener;
+
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private View rootView;
+
+        private ImageView imageView;
+        private DrawerLayout mDrawerLayout;
+        private ListView listView;
+        private ImageView groupIcon;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -210,7 +242,26 @@ public class HomeActivity extends ActionBarActivity implements
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_home3, container, false);
+            rootView = inflater.inflate(R.layout.fragment_home3, container, false);
+//            getActivity().findViewById(R.id.drawer_layout);
+//            getActivity().findViewById(R.id.drawer_layout);
+
+//            imageView = (ImageView) rootView.findViewById(R.id.ic_nav);
+//            imageView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    NavigationDrawerFragment.mDrawerLayout.openDrawer(NavigationDrawerFragment.mDrawerListView);
+//                }
+//            });
+//
+//            groupIcon = (ImageView) rootView.findViewById(R.id.ic_user);
+//            groupIcon.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    mListener = (onFragmentInteractionListener) getActivity();
+//                    mListener.UserFragment();
+//                }
+//            });
             return rootView;
         }
 
@@ -220,6 +271,11 @@ public class HomeActivity extends ActionBarActivity implements
             ((HomeActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
+          }
+
+public interface onFragmentInteractionListener{
+        void UserFragment();
     }
+
 
 }

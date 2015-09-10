@@ -7,7 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.omii026.testing.R;
 
@@ -32,15 +36,13 @@ public class MusicPlayer extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private ImageView imageView;
+    private String[] lower_item;
+    private int[] image_Id;
+    private GridView gridView;
+    private PlayerGridAdapter mPlayerGridAdapter;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MusicPlayer.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static MusicPlayer newInstance(String param1) {
         MusicPlayer fragment = new MusicPlayer();
@@ -58,10 +60,20 @@ public class MusicPlayer extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            Item = getArguments().getString(ARG_PARAM1);
 
-        }
+         lower_item = new String[] {
+                "All Music","Recent player","Artist","Album","Folder","Playlist","Recent Add"
+        };
+         image_Id = new int[]{
+                R.drawable.ic_audiotrack_white_24dp,
+                R.drawable.ic_library_music_white_24dp,
+                R.drawable.ic_person_outline_white_24dp,
+                R.drawable.ic_album_white_24dp,
+                R.drawable.ic_folder_open_white_24dp,
+                R.drawable.ic_queue_music_white_24dp,
+                R.drawable.ic_content_paste_white_24dp,
+        };
+
     }
 
     @Override
@@ -70,7 +82,46 @@ public class MusicPlayer extends Fragment {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_music_player, container, false);
         ( (TextView)view.findViewById(R.id.playerText)).setText(Item);
+        imageView = (ImageView) view.findViewById(R.id.ic_back_player);
+        gridView = (GridView) view.findViewById(R.id.grid_view);
 
+        mPlayerGridAdapter = new PlayerGridAdapter(getActivity(),lower_item,image_Id);
+        gridView.setAdapter(mPlayerGridAdapter);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View v, int position, long arg3) {
+                Toast.makeText(getActivity().getApplicationContext(), "Clicked", Toast.LENGTH_SHORT).show();
+                TextView textView = (TextView) view.findViewById(R.id.grid_lower_item);
+            }
+        });
+        final ImageView play_Image = (ImageView) view.findViewById(R.id.play);
+        play_Image.setOnClickListener(new View.OnClickListener() {
+            int set;
+            @Override
+            public void onClick(View v) {
+
+                if(set != 1) {
+                    Toast.makeText(getActivity(),"Play click",Toast.LENGTH_SHORT).show();
+                    play_Image.setImageResource(R.drawable.ic_pause_white_24dp);
+                    set = 1;
+                }
+                else {
+                    Toast.makeText(getActivity(),"Pause click",Toast.LENGTH_SHORT).show();
+                    play_Image.setImageResource(R.drawable.ic_play_arrow_white_24dp);
+                    set =0;
+                }
+
+            }
+        });
+
+
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStackImmediate();
+            }
+        });
         return view;
     }
 

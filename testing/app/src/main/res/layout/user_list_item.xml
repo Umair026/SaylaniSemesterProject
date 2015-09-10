@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+<RelativeLayout
+    android:id="@+id/user_list"
+    android:background="#fca69f"
+    android:gravity="left|center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+
+
+
+    <ImageView
+        android:background="@android:drawable/ic_menu_camera"
+        android:id="@+id/userImage"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_toRightOf="@id/userImage"
+        android:text="Umair"
+        android:layout_marginTop="7dp"
+        android:textSize="16dp"
+        android:textColor="#fff"
+        android:textStyle="bold|italic"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/addFriend"
+        android:layout_marginRight="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_add_white_18dp"/>
+</RelativeLayout>
+
+    <View
+        android:id="@+id/view_list"
+        android:layout_below="@id/user_list"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="#fff"/>
+</RelativeLayout>

@@ -3,11 +3,16 @@ package com.example.omii026.testing.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.omii026.testing.Activities.HomeActivity;
+import com.example.omii026.testing.Activities.NavigationDrawerFragment;
 import com.example.omii026.testing.R;
 
 
@@ -24,7 +29,13 @@ public class Home extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String Item;
-    private View view;
+    private View rootView;
+
+    private ImageView imageView;
+    private DrawerLayout mDrawerLayout;
+    private ListView listView;
+    private ImageView groupIcon;
+    private onFragmentInteractionListener mListener;
 
 
     // TODO: Rename and change types and number of parameters
@@ -55,11 +66,30 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =  inflater.inflate(R.layout.fragment_fragment_home, container, false);
-        ( (TextView)view.findViewById(R.id.HomeText)).setText(Item);
+        rootView =  inflater.inflate(R.layout.fragment_fragment_home, container, false);
 
-        return view;
+        imageView = (ImageView) rootView.findViewById(R.id.ic_nav);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavigationDrawerFragment.mDrawerLayout.openDrawer(NavigationDrawerFragment.mDrawerListView);
+            }
+        });
+
+        groupIcon = (ImageView) rootView.findViewById(R.id.ic_user);
+        groupIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener = (onFragmentInteractionListener) getActivity();
+                mListener.UserFragment();
+            }
+        });
+
+        return rootView;
     }
 
+    public interface onFragmentInteractionListener{
+        void UserFragment();
+    }
 
 }

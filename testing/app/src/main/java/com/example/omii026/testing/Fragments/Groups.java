@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.omii026.testing.R;
@@ -27,16 +28,11 @@ public class Groups extends Fragment {
     private String Item;
     private String mParam2;
     private View view;
+    private ImageView imageView;
+    private ImageView chat_icon;
+    private OnFragmentInteractionListener mListener;
 
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Groups.
-     */
     // TODO: Rename and change types and number of parameters
     public static Groups newInstance(String param1) {
         Groups fragment = new Groups();
@@ -64,8 +60,31 @@ public class Groups extends Fragment {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_groups, container, false);
         ( (TextView)view.findViewById(R.id.groupText)).setText(Item);
+        imageView = (ImageView) view.findViewById(R.id.ic_back_group);
+        chat_icon = (ImageView) view.findViewById(R.id.ic_chat);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStackImmediate();
+            }
+        });
+
+
+
+        chat_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener = (OnFragmentInteractionListener)getActivity();
+                mListener.OpenGroupChatFragment();
+
+            }
+        });
 
         return view;
+    }
+    public interface OnFragmentInteractionListener{
+        void OpenGroupChatFragment();
     }
 
 

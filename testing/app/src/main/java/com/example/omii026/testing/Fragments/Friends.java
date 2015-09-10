@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.omii026.testing.R;
@@ -26,7 +27,7 @@ public class Friends extends Fragment {
     private String Item;
     private String mParam2;
     private View view;
-
+    private ImageView imageView;
 
 
     // TODO: Rename and change types and number of parameters
@@ -58,6 +59,14 @@ public class Friends extends Fragment {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_friends, container, false);
         ( (TextView)view.findViewById(R.id.friendText)).setText(Item);
+        imageView = (ImageView) view.findViewById(R.id.ic_back_friends);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStackImmediate();
+            }
+        });
     return view;}
 
 

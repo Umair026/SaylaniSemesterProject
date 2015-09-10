@@ -5,12 +5,24 @@ import android.support.v4.app.Fragment;
 import android.content.ClipData;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.omii026.testing.Firebase.FireBaseHandler;
 import com.example.omii026.testing.R;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.FirebaseError;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link android.app.Fragment} subclass.
@@ -32,13 +44,16 @@ public class FindFriends extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private View view;
+    private static final String TAG = "FindFriend";
+    private ArrayList<UserData> dataList = new ArrayList<>();
+    private ListView listView;
+    private ImageView imageView;
 
     // TODO: Rename and change types and number of parameters
     public static FindFriends newInstance(String param1) {
         FindFriends fragment = new FindFriends();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,7 +67,6 @@ public class FindFriends extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             Item = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -60,14 +74,89 @@ public class FindFriends extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =  inflater.inflate(R.layout.fragment_find_friends, container, false);
-        ( (TextView)view.findViewById(R.id.findText)).setText(Item);
+          view =  inflater.inflate(R.layout.fragment_find_friends, container, false);
+         listView = (ListView) view.findViewById(R.id.Umair);
+         imageView = (ImageView) view.findViewById(R.id.ic_back_find);
+
+
+        FireBaseHandler.getInstance().getUserRef().addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String key = dataSnapshot.getKey();
+                Map<String,Object> userData = (Map<String, Object>) dataSnapshot.getValue();
+                String userId = userData.get("profile-image").toString();
+                UserData data = new UserData(key,userId);
+                dataList.add(data);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+FindFriendListAdapter findFriendListAdapter =new FindFriendListAdapter(getActivity().getApplicationContext(),dataList);
+        listView.setAdapter(findFriendListAdapter);
+        findFriendListAdapter.notifyDataSetChanged();
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().popBackStackImmediate();
+            }
+        });
 
     return view;
     }
 
-
-
+//    private void findFriend() {
+//        FireBaseHandler.getInstance().getUserRef().addChildEventListener( new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//                Log.d(TAG, ""+dataSnapshot.getKey());
+//                String key = dataSnapshot.getKey();
+//                HashMap<String,Object> userData = (HashMap<String, Object>) dataSnapshot.getValue();
+//                    String userImage = userData.get("profile-image").toString();
+//                UserData data = new UserData(key,userImage);
+//                    list.add(data);
+//            }
+//
+//            @Override
+//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(FirebaseError firebaseError) {
+//
+//            }
+//        });
+//
+//    }
 
 
     /**
@@ -85,4 +174,30 @@ public class FindFriends extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
+}
+
+ class UserData{
+    String image;
+    String userId;
+
+    public UserData(String userId,String image){
+        this.image = image;
+        this.userId = userId;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }

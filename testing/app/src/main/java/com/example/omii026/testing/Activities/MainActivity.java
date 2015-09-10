@@ -31,11 +31,10 @@ public class MainActivity extends ActionBarActivity {
     Firebase pRef;
     Firebase nPRef;
     int a;
-    private ProgressDialog progressDialog,progressDialog1;
+    private ProgressDialog progressDialog;
     private EditText f_Name, l_Name, loginEmail, loginPassword, signupUid, signupEmail, signupPassword;
     Button signin,signup,create;
     private String fName,lName,S_Password, l_Email, l_Password, S_Uid, S_Email;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,10 +67,7 @@ public class MainActivity extends ActionBarActivity {
                 S_Email = signupEmail.getText().toString();
                 S_Password = signupPassword.getText().toString();
 
-
-
                 progressDialog =  ProgressDialog.show(MainActivity.this,"Creating User","Loading..",true,false);
-
 
          //creating user using firebase authentication services    "createUser"
                 FireBaseHandler.getInstance().getRootFirebaseRef()
@@ -81,8 +77,9 @@ public class MainActivity extends ActionBarActivity {
                                     @Override
                                     public void onSuccess(Map<String, Object> stringObjectMap) {
                                         Toast.makeText(MainActivity.this, "userCreated:", Toast.LENGTH_SHORT).show();
-                                        progressDialog.dismiss();
+//                                        progressDialog.dismiss();
                                         User user = new User(fName, lName,S_Uid, S_Email, S_Password);
+
 
           // creating user data to firebase node
                                         UserService.addUser(user, new ServiceListener() {
@@ -114,35 +111,31 @@ public class MainActivity extends ActionBarActivity {
         ((Button) findViewById(R.id.signin)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                progressDialog1 =  ProgressDialog.show(MainActivity.this,"Signing in","Connection..",true,false);
-//
-//                l_Email = loginEmail.getText().toString();
-//                l_Password = loginPassword.getText().toString();
-//                Toast.makeText(MainActivity.this,"l_Email:"+l_Email+"l_Password:"+l_Password,Toast.LENGTH_SHORT).show();
-//
-//                FireBaseHandler.getInstance().getRootFirebaseRef()
-//                        .authWithPassword(loginEmail.getText().toString(),
-//                                loginPassword.getText().toString(), new Firebase.AuthResultHandler() {
-//
-//                                    @Override
-//                                    public void onAuthenticated(AuthData authData) {
-//                                        Toast.makeText(MainActivity.this, "auth id-> " + authData.getUid(), Toast.LENGTH_SHORT).show();
-//                                        Log.d("test", ""+authData.getUid());
-//                                      progressDialog1.dismiss();
+                progressDialog =  ProgressDialog.show(MainActivity.this,"Loging in","Loading..",true,false);
 
+                l_Email = loginEmail.getText().toString();
+                l_Password = loginPassword.getText().toString();
+                Toast.makeText(MainActivity.this,"l_Email:"+l_Email+"l_Password:"+l_Password,Toast.LENGTH_SHORT).show();
+
+                FireBaseHandler.getInstance().getRootFirebaseRef()
+                        .authWithPassword(loginEmail.getText().toString(),
+                                loginPassword.getText().toString(), new Firebase.AuthResultHandler() {
+
+                                    @Override
+                                    public void onAuthenticated(AuthData authData) {
+                                        Toast.makeText(MainActivity.this, "auth id-> " + authData.getUid(), Toast.LENGTH_SHORT).show();
+                                            progressDialog.dismiss();
                                         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                                         startActivity(intent);
+//
+                                    }
 
-//                                    }
-//
-//                                    @Override
-//                                    public void onAuthenticationError(FirebaseError firebaseError) {
-//                                        Toast.makeText(MainActivity.this, "Autherror->" + firebaseError.getMessage(), Toast.LENGTH_SHORT).show();
-//                                        Log.d("test", ""+firebaseError.getMessage());
-//                                        progressDialog1.dismiss();
-//                                    }
-//
-//                                });
+                                    @Override
+                                    public void onAuthenticationError(FirebaseError firebaseError) {
+                                        Toast.makeText(MainActivity.this, "Autherror->" + firebaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                                    progressDialog.dismiss();
+                                    }
+                                });
 
             }
         });
