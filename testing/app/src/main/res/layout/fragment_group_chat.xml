@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:layout_alignParentTop="true"
         android:id="@+id/toolbar_gallery"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -48,7 +49,8 @@
 
     <ListView
         android:id="@+id/groupChatList"
-        android:layout_below="@id/toolbar_gallery"
+        android:layout_below="@+id/view_gallery"
+        android:layout_above="@+id/chat_textArea"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <View
@@ -59,6 +61,7 @@
         android:background="@drawable/view_drawable"/>
 
     <RelativeLayout
+
         android:layout_alignParentBottom="true"
         android:background="#f75"
         android:orientation="horizontal"

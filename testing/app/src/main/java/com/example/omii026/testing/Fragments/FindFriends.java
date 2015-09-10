@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.omii026.testing.Firebase.FireBaseHandler;
 import com.example.omii026.testing.R;
+import com.example.omii026.testing.SupportClasses.UserData;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
@@ -174,30 +175,4 @@ FindFriendListAdapter findFriendListAdapter =new FindFriendListAdapter(getActivi
         public void onFragmentInteraction(Uri uri);
     }
 
-}
-
- class UserData{
-    String image;
-    String userId;
-
-    public UserData(String userId,String image){
-        this.image = image;
-        this.userId = userId;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 }

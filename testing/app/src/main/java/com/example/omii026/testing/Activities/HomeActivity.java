@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.omii026.testing.Fragments.ChatFragment;
 import com.example.omii026.testing.Fragments.FindFriends;
 import com.example.omii026.testing.Fragments.Friends;
 import com.example.omii026.testing.Fragments.Gallery;
@@ -28,15 +29,15 @@ import com.example.omii026.testing.Fragments.Groups;
 import com.example.omii026.testing.Fragments.Home;
 import com.example.omii026.testing.Fragments.MusicPlayer;
 import com.example.omii026.testing.R;
+import com.example.omii026.testing.SupportClasses.UserData;
 
 import java.security.acl.Group;
 
 public class HomeActivity extends ActionBarActivity implements
         NavigationDrawerFragment.NavigationDrawerCallbacks,
         Home.onFragmentInteractionListener,
-        Groups.OnFragmentInteractionListener
-
-{
+        Groups.OnFragmentInteractionListener,
+        Friends.OnFragmentInteractionListener    {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -203,7 +204,15 @@ private static DrawerLayout mDrawerLayout;
     @Override
     public void OpenGroupChatFragment() {
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, GroupChatFragment.newInstance("Group","Group")).addToBackStack(null).commit();
+                .add(R.id.container, new GroupChatFragment()).addToBackStack(null).commit();
+    }
+
+    @Override
+    public void OpenChatFragment(UserData data) {
+        String uid = data.getUserId();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.container, ChatFragment.newInstance("chat",uid))
+                .addToBackStack(null).commit();
     }
 
     /**

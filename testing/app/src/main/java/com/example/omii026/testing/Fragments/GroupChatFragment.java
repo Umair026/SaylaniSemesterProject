@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.omii026.testing.Class.User;
 import com.example.omii026.testing.R;
 
 /**
@@ -43,6 +44,7 @@ public class GroupChatFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        GroupChatAdapter.init("hello Bro! whats up");
     }
 
     @Nullable
@@ -59,8 +61,13 @@ public class GroupChatFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (!chat_text.getText().toString().equals("")) {
-                    GroupChatAdapter.groupItemList.add(chat_text.getText().toString());
-                      groupChatAdapter.notifyDataSetChanged();
+//                    GroupChatAdapter.groupItemList.add(chat_text.getText().toString());
+
+
+
+
+
+                    groupChatAdapter.notifyDataSetChanged();
                       chat_text.setText("");
                     listView.smoothScrollToPosition(GroupChatAdapter.groupItemList.size() - 1);
                 } else {
@@ -74,7 +81,7 @@ public class GroupChatFragment extends Fragment {
         listView.setAdapter(groupChatAdapter);
         groupChatAdapter.notifyDataSetChanged();
 
-        GroupChatAdapter.init("hello Bro! whats up");
+//        GroupChatAdapter.init("hello Bro! whats up");
 
 
 

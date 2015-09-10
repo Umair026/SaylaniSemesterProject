@@ -7,11 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.omii026.testing.Class.DrawerItem;
+import com.example.omii026.testing.SupportClasses.DrawerItem;
 import com.example.omii026.testing.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Omii026 on 9/2/2015.

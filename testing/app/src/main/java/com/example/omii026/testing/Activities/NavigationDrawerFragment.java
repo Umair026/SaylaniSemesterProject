@@ -1,12 +1,10 @@
 package com.example.omii026.testing.Activities;
 
-import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -20,12 +18,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.omii026.testing.Class.DrawerItem;
-import com.example.omii026.testing.Fragments.Home;
+import com.example.omii026.testing.SupportClasses.DrawerItem;
 import com.example.omii026.testing.Fragments.NavigationAdapter;
 import com.example.omii026.testing.R;
 

@@ -1,9 +1,12 @@
 package com.example.omii026.testing.Fragments;
 
+import android.app.ListFragment;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -13,30 +16,27 @@ import com.example.omii026.testing.SupportClasses.UserData;
 import java.util.ArrayList;
 
 /**
- * Created by Omii026 on 9/2/2015.
+ * Created by Omii026 on 9/10/2015.
  */
-public class FindFriendListAdapter extends BaseAdapter {
-    private static ArrayList<UserData> list2 = new ArrayList<>();
-    private  ArrayList<UserData> dataList = new ArrayList<>();
-    private LayoutInflater inflater;
-    private Context context;
+public class FriendsListAdapter extends BaseAdapter{
 
-    public FindFriendListAdapter (Context context,ArrayList<UserData> dataList){
+    private ArrayList<UserData> data = new ArrayList<>();
+    private Context context;
+    private LayoutInflater inflater;
+    public FriendsListAdapter(Context context,ArrayList<UserData> data){
         this.context = context;
-        this.dataList = dataList;
+        this.data = data;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
-
     @Override
     public int getCount() {
-        return dataList.size();
-
+        return data.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return dataList.get(i);
+        return data.get(i);
     }
 
     @Override
@@ -46,18 +46,11 @@ public class FindFriendListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        if(view == null) {
-            view = inflater.inflate(R.layout.user_list_item, viewGroup, false);
+        if(view == null){
+            view = inflater.inflate(R.layout.user_list_item,viewGroup,false);
         }
-        ((TextView) view.findViewById(R.id.name)).setText(dataList.get(i).getUserId());
-
+        ((TextView) view.findViewById(R.id.name)).setText(data.get(i).getUserId());
 
         return view;
     }
-
-    public static void add(UserData s){
-        list2.add(s);
-    }
-
-
 }
