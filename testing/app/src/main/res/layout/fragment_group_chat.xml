@@ -52,6 +52,7 @@
         android:layout_below="@+id/view_gallery"
         android:layout_above="@+id/chat_textArea"
         android:layout_width="match_parent"
+        android:divider="@android:color/transparent"
         android:layout_height="match_parent"/>
     <View
         android:id="@+id/view_gallery"

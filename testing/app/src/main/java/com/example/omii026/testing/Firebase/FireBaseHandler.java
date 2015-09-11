@@ -10,6 +10,7 @@ public class FireBaseHandler {
     private static FireBaseHandler ourReference;
 
     private Firebase userRef;
+    private Firebase userChatRef;
 
 
     public static FireBaseHandler getInstance(){
@@ -33,9 +34,13 @@ public class FireBaseHandler {
 
     ///
 
-    public Firebase getUserRef(){
+    public Firebase getUserRef()
+    {
         return userRef = mFirebaseRef.child("Users");
     }
-
+    public Firebase getUserChatRef()
+    {
+        return userChatRef = mFirebaseRef.child("Users-chat");
+    }
 
 }

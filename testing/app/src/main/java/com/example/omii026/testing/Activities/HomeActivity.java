@@ -208,8 +208,8 @@ private static DrawerLayout mDrawerLayout;
     }
 
     @Override
-    public void OpenChatFragment(UserData data) {
-        String uid = data.getUserId();
+    public void OpenChatFragment(String uid) {
+
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container, ChatFragment.newInstance("chat",uid))
                 .addToBackStack(null).commit();

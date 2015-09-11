@@ -16,9 +16,12 @@ import android.widget.Toast;
 
 import com.example.omii026.testing.Class.User;
 import com.example.omii026.testing.Firebase.FireBaseHandler;
+import com.example.omii026.testing.MeApp;
 import com.example.omii026.testing.R;
 import com.example.omii026.testing.Services.*;
 import com.firebase.client.AuthData;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
@@ -35,6 +38,8 @@ public class MainActivity extends ActionBarActivity {
     private EditText f_Name, l_Name, loginEmail, loginPassword, signupUid, signupEmail, signupPassword;
     Button signin,signup,create;
     private String fName,lName,S_Password, l_Email, l_Password, S_Uid, S_Email;
+    private User user;
+    private ProgressDialog progressDialog1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,20 +116,96 @@ public class MainActivity extends ActionBarActivity {
         ((Button) findViewById(R.id.signin)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressDialog =  ProgressDialog.show(MainActivity.this,"Loging in","Loading..",true,false);
+                progressDialog1 =  ProgressDialog.show(MainActivity.this,"Loging in","Loading..",true,false);
 
                 l_Email = loginEmail.getText().toString();
                 l_Password = loginPassword.getText().toString();
-                Toast.makeText(MainActivity.this,"l_Email:"+l_Email+"l_Password:"+l_Password,Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"l_Email:"+l_Email,Toast.LENGTH_SHORT).show();
+
+                FireBaseHandler.getInstance().getUserRef().addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                     Map<String,Object> data = (Map<String,Object>) dataSnapshot.getValue();
+                      String mail =  data.get("email").toString();
+                      String pass = data.get("password").toString();
+                        if(mail.equals(l_Email) && pass.equals(l_Password)){
+                            String fname = data.get("first-name").toString();
+                            String lname = data.get("last-name").toString();
+                             user = new User(fname, lname,mail,dataSnapshot.getKey().toString());
+
+                        }else{
+
+                        }
+                    }
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
+
+                    }
+                });
 
                 FireBaseHandler.getInstance().getRootFirebaseRef()
                         .authWithPassword(loginEmail.getText().toString(),
                                 loginPassword.getText().toString(), new Firebase.AuthResultHandler() {
-
                                     @Override
                                     public void onAuthenticated(AuthData authData) {
                                         Toast.makeText(MainActivity.this, "auth id-> " + authData.getUid(), Toast.LENGTH_SHORT).show();
-                                            progressDialog.dismiss();
+                                        progressDialog1.dismiss();
+                                        FireBaseHandler.getInstance()
+                                                .getUserRef().addChildEventListener(new ChildEventListener()
+                                        {
+                                            @Override
+                                            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                                Map<String,Object> data = (Map<String,Object>) dataSnapshot.getValue();
+                                                String mail =  data.get("email").toString();
+                                                String pass = data.get("password").toString();
+                                                if(mail.equals(l_Email) && pass.equals(l_Password)){
+                                                    String fname = data.get("first-name").toString();
+                                                    String lname = data.get("last-name").toString();
+                                                    user = new User(fname, lname,mail,dataSnapshot.getKey().toString());
+                                                    MeApp.setUser(user);
+                                                }else{
+
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                                            }
+
+                                            @Override
+                                            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                                            }
+
+                                            @Override
+                                            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(FirebaseError firebaseError) {
+
+                                            }
+                                        });
+
+
                                         Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                                         startActivity(intent);
 //

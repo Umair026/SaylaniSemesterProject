@@ -4,12 +4,31 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.omii026.testing.Class.User;
+import com.example.omii026.testing.Firebase.FireBaseHandler;
+import com.example.omii026.testing.MeApp;
 import com.example.omii026.testing.R;
+import com.example.omii026.testing.Services.ServiceError;
+import com.example.omii026.testing.Services.ServiceListener;
+import com.example.omii026.testing.Services.UserService;
+import com.example.omii026.testing.SupportClasses.ChatData;
 import com.example.omii026.testing.SupportClasses.UserData;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,15 +49,15 @@ public class ChatFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private View view;
+    private ImageView chat_sent;
+    private TextView chat_text;
+    private ListView listView;
+    private UserChatAdapter userChatAdapter;
+    private ArrayList<ChatData> textMessage = new ArrayList<>();
+    private static final String TAG = "ChatFragment";
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ChatFragment.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static ChatFragment newInstance(String param1, String param2) {
         ChatFragment fragment = new ChatFragment();
@@ -66,7 +85,84 @@ public class ChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
+        view =  inflater.inflate(R.layout.fragment_chat, container, false);
+        ((TextView)view.findViewById(R.id.title_chat)).setText(mParam2);
+
+        chat_sent = (ImageView) view.findViewById(R.id.chat_sent);
+        chat_text = (TextView) view.findViewById(R.id.chat_Text);
+        listView = (ListView) view.findViewById(R.id.ChatList);
+
+
+        userChatAdapter = new UserChatAdapter(getContext(),textMessage);
+        listView.setAdapter(userChatAdapter);
+        userChatAdapter.notifyDataSetChanged();
+
+        chat_sent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!(chat_text.getText().toString().equals(""))){
+//                    textMessage.add(chat_text.getText().toString());
+                    String msg = chat_text.getText().toString();
+                    String key = MeApp.getAppUser().getUserId();
+                    HashMap<String,Object> map = new HashMap<String, Object>();
+                    map.put("message",msg);
+                    map.put("uid",key);
+                    FireBaseHandler.getInstance().getUserChatRef()
+                            .child(MeApp.getAppUser().getUserId())
+                            .child(mParam2).push().setValue(map, new Firebase.CompletionListener() {
+                        @Override
+                        public void onComplete(FirebaseError firebaseError, Firebase firebase) {
+                            chat_text.setText("");
+                        }
+                    });
+
+                    FireBaseHandler.getInstance().getUserChatRef().child(MeApp.getAppUser().getUserId()).child(mParam2)
+                            .addChildEventListener(new ChildEventListener() {
+                                @Override
+                                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                    HashMap<String,Object> chatMap = (HashMap<String, Object>) dataSnapshot.getValue();
+                                if(chatMap != null){
+
+                                    String msg = chatMap.get("message").toString();
+                                    String senderId = chatMap.get("uid").toString();
+                                    ChatData chatData = new ChatData(senderId,msg);
+                                    if(!(textMessage.contains(chatData))) {
+                                        textMessage.add(chatData);
+                                        userChatAdapter.notifyDataSetChanged();
+                                    }
+                                }
+                                }
+
+                                @Override
+                                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                                }
+
+                                @Override
+                                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+
+                                }
+
+                                @Override
+                                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                                }
+
+                                @Override
+                                public void onCancelled(FirebaseError firebaseError) {
+
+                                }
+                            });
+
+
+                userChatAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+
+        return view;
     }
 //
 //    // TODO: Rename method, update argument and hook method into UI event
@@ -75,7 +171,7 @@ public class ChatFragment extends Fragment {
 //            mListener.onFragmentInteraction(uri);
 //        }
 //    }
-//
+////
 //    @Override
 //    public void onAttach(Activity activity) {
 //        super.onAttach(activity);
@@ -107,5 +203,7 @@ public class ChatFragment extends Fragment {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
+
+
 
 }

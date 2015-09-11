@@ -11,6 +11,7 @@ public class User {
     private String email;
     private String profileImage;
     private String password;
+    private String key;
     private boolean online_status;
 
     public User(String f_name, String l_name,String userId, String email, String password){
@@ -21,6 +22,15 @@ public class User {
 //        this.profileImage = profileImage;
         this.password = password;
     }
+
+    public User(String f_name, String l_name, String email,String userId){
+        this.f_name = f_name;
+        this.l_name = l_name;
+        this.email = email;
+        this.userId = userId;
+        this.password = password;
+    }
+
 
     public User(String email, String password){
         this.email = email;

@@ -123,7 +123,7 @@ public class Friends extends Fragment {
                 Toast.makeText(getActivity().getApplicationContext(),""+data.getUserId(),Toast.LENGTH_SHORT).show();
 
                 mListener = (OnFragmentInteractionListener) getActivity();
-                mListener.OpenChatFragment(data);
+                mListener.OpenChatFragment(data.getUserId());
             }
         });
 //         friendsListAdapter = new FriendsListAdapter(getActivity().getApplicationContext(),frndList);
@@ -138,7 +138,7 @@ public class Friends extends Fragment {
     return view;
     }
     public interface OnFragmentInteractionListener{
-        void OpenChatFragment(UserData data);
+        void OpenChatFragment(String data);
     }
 
 

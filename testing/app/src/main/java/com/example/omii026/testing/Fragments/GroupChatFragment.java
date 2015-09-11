@@ -44,7 +44,7 @@ public class GroupChatFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        GroupChatAdapter.init("hello Bro! whats up");
+
     }
 
     @Nullable
@@ -61,15 +61,10 @@ public class GroupChatFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (!chat_text.getText().toString().equals("")) {
-//                    GroupChatAdapter.groupItemList.add(chat_text.getText().toString());
-
-
-
-
-
+                    GroupChatAdapter.groupItemList.add(chat_text.getText().toString());
                     groupChatAdapter.notifyDataSetChanged();
                       chat_text.setText("");
-                    listView.smoothScrollToPosition(GroupChatAdapter.groupItemList.size() - 1);
+                    listView.smoothScrollToPosition(GroupChatAdapter.groupItemList.size());
                 } else {
 
                 }
@@ -81,7 +76,6 @@ public class GroupChatFragment extends Fragment {
         listView.setAdapter(groupChatAdapter);
         groupChatAdapter.notifyDataSetChanged();
 
-//        GroupChatAdapter.init("hello Bro! whats up");
 
 
 

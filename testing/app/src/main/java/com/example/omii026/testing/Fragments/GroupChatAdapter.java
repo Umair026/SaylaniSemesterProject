@@ -28,13 +28,6 @@ public class GroupChatAdapter extends BaseAdapter {
     public GroupChatAdapter(Context context){
         this.context = context;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if(groupItemList.size() == 0) {
-
-        }
-    }
-
-    public static void init(String s) {
-        groupItemList.add(s);
     }
 
     @Override
@@ -44,7 +37,6 @@ public class GroupChatAdapter extends BaseAdapter {
 
     @Override
     public String getItem(int i) {
-
         return groupItemList.get(i);
     }
 
