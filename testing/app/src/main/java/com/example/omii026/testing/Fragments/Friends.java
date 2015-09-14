@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.omii026.testing.Class.User;
 import com.example.omii026.testing.Firebase.FireBaseHandler;
+import com.example.omii026.testing.MeApp;
 import com.example.omii026.testing.R;
 import com.example.omii026.testing.SupportClasses.UserData;
 import com.firebase.client.ChildEventListener;
@@ -22,6 +23,7 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -46,6 +48,7 @@ public class Friends extends Fragment {
     private FriendsListAdapter friendsListAdapter;
 
     private OnFragmentInteractionListener mListener;
+    public static ArrayList<ChatRef> chatRefDataList = new ArrayList<>();
 
 
     // TODO: Rename and change types and number of parameters
@@ -83,14 +86,15 @@ public class Friends extends Fragment {
         friendsListAdapter = new FriendsListAdapter(getActivity().getApplicationContext(),frndList);
         listView.setAdapter(friendsListAdapter);
 
-        FireBaseHandler.getInstance().getUserRef().addChildEventListener(new ChildEventListener() {
+        FireBaseHandler.getInstance().getFriendshipRef().child(MeApp.getAppUser().getUserId()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String key = dataSnapshot.getKey();
-                Map<String,Object> userData = (Map<String, Object>) dataSnapshot.getValue();
-                String userId = userData.get("profile-image").toString();
-                UserData data = new UserData(key,userId);
+                String userId = dataSnapshot.getKey();
+                Map<String, Object> userData = (Map<String, Object>) dataSnapshot.getValue();
+                String userImage = userData.get("profile-image").toString();
+                UserData data = new UserData(userId, userImage);
                 frndList.add(data);
+                friendsListAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -114,6 +118,39 @@ public class Friends extends Fragment {
             }
         });
 
+        FireBaseHandler.getInstance().getUserChatRef().child(MeApp.getAppUser().getUserId())
+                .addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                        String chatKey = dataSnapshot.getKey();
+                        HashMap<String,Object> ChatRefvalue = (HashMap<String, Object>) dataSnapshot.getValue();
+
+                        String chatKeydata = (String) ChatRefvalue.get(chatKey);
+                        ChatRef chatref = new ChatRef(chatKey,chatKeydata);
+                        chatRefDataList.add(chatref);
+                    }
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
+
+                    }
+                });
         friendsListAdapter.notifyDataSetChanged();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -140,6 +177,30 @@ public class Friends extends Fragment {
     public interface OnFragmentInteractionListener{
         void OpenChatFragment(String data);
     }
+class ChatRef{
+    private String ref;
+    private String key;
 
+    public ChatRef(String key,String ref){
+        this.key = key;
+        this.ref = ref;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getRef() {
+        return ref;
+    }
+
+    public void setRef(String ref) {
+        this.ref = ref;
+    }
+}
 
 }

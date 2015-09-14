@@ -49,6 +49,7 @@ public class FindFriends extends Fragment {
     private ArrayList<UserData> dataList = new ArrayList<>();
     private ListView listView;
     private ImageView imageView;
+    private FindFriendListAdapter findFriendListAdapter;
 
     // TODO: Rename and change types and number of parameters
     public static FindFriends newInstance(String param1) {
@@ -88,6 +89,7 @@ public class FindFriends extends Fragment {
                 String userId = userData.get("profile-image").toString();
                 UserData data = new UserData(key,userId);
                 dataList.add(data);
+                findFriendListAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -110,7 +112,7 @@ public class FindFriends extends Fragment {
 
             }
         });
-FindFriendListAdapter findFriendListAdapter =new FindFriendListAdapter(getActivity().getApplicationContext(),dataList);
+ findFriendListAdapter =new FindFriendListAdapter(getActivity().getApplicationContext(),dataList);
         listView.setAdapter(findFriendListAdapter);
         findFriendListAdapter.notifyDataSetChanged();
 

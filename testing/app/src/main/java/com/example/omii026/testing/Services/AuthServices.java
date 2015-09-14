@@ -11,18 +11,18 @@ import com.firebase.client.FirebaseError;
  */
 public class AuthServices {
 
-    public static void Login(String email,String password){
+    public static void Login(String email,String password, final ServiceListener listener){
 
         FireBaseHandler.getInstance().getRootFirebaseRef()
                 .authWithPassword(email, password, new Firebase.AuthResultHandler() {
                     @Override
                     public void onAuthenticated(AuthData authData) {
-
+                    listener.success(authData);
                     }
 
                     @Override
                     public void onAuthenticationError(FirebaseError firebaseError) {
-
+                    listener.error(new ServiceError(firebaseError.getMessage(),firebaseError.toException()));
                     }
 
                 });

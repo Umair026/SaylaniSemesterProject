@@ -12,6 +12,7 @@ public class UserData{
         this.userId = userId;
     }
 
+
     public String getImage() {
         return image;
     }

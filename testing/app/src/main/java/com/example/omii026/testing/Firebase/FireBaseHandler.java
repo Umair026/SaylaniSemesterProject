@@ -11,6 +11,9 @@ public class FireBaseHandler {
 
     private Firebase userRef;
     private Firebase userChatRef;
+    private Firebase conversationRef;
+    private Firebase friendshipRef;
+
 
 
     public static FireBaseHandler getInstance(){
@@ -42,5 +45,10 @@ public class FireBaseHandler {
     {
         return userChatRef = mFirebaseRef.child("Users-chat");
     }
-
+    public Firebase getConversationRef() {
+        return conversationRef = mFirebaseRef.child("user-conversation");
+    }
+    public Firebase getFriendshipRef() {
+        return friendshipRef = mFirebaseRef.child("friendship");
+    }
 }

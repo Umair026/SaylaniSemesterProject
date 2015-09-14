@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class UserChatAdapter extends BaseAdapter {
 
-    private ArrayList<ChatData> obj = new ArrayList<>();
+    private ArrayList<ChatData> obj;
     private Context context;
     private LayoutInflater inflater;
     public UserChatAdapter(Context context,ArrayList<ChatData> obj){
@@ -34,7 +34,6 @@ public class UserChatAdapter extends BaseAdapter {
 
     @Override
     public String getItem(int i)
-
     {
         return obj.get(i).getMsg();
     }

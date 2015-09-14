@@ -56,6 +56,22 @@ public class UserService {
 
         }
 
+    public static void createChat(String message,String from,String mPrams){
+
+        HashMap<String,Object> chatMap = new HashMap<>();
+        chatMap.put("message",message);
+        chatMap.put("from",from);
+        chatMap.put("time",System.currentTimeMillis());
+//
+//        Firebase ref = FireBaseHandler.getInstance()
+//                      .getConversationRef().push();
+//
+//                       ref.push().setValue(chatMap);
+////                .child("messages").push().setValue(chatMap);
+
+
+    }
+
 
     }
 

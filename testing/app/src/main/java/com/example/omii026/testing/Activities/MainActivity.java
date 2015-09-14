@@ -159,6 +159,21 @@ public class MainActivity extends ActionBarActivity {
                     }
                 });
 
+//                    AuthServices.Login(loginEmail.getText().toString(),loginPassword.getText().toString(), new ServiceListener<User>() {
+//                        @Override
+//                        public void success(User user) {
+//                            Log.d("Seccess User",""+user);
+//                            progressDialog1.dismiss();
+//
+//                        }
+//
+//                        @Override
+//                        public void error(ServiceError serviceError) {
+//                            Toast.makeText(getApplicationContext(),"Authentication Error plz check connection",Toast.LENGTH_SHORT).show();
+//                            progressDialog1.dismiss();
+//                        }
+//                    });
+
                 FireBaseHandler.getInstance().getRootFirebaseRef()
                         .authWithPassword(loginEmail.getText().toString(),
                                 loginPassword.getText().toString(), new Firebase.AuthResultHandler() {
