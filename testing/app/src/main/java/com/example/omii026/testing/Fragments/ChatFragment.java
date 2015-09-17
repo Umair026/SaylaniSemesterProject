@@ -260,7 +260,7 @@ public class ChatFragment extends Fragment {
                     }
                 });
                     //** end of method 1 **
-        userChatAdapter = new UserChatAdapter(getContext(),textMessage);
+        userChatAdapter = new UserChatAdapter(getActivity().getApplicationContext(),textMessage);
         listView.setAdapter(userChatAdapter);
         userChatAdapter.notifyDataSetChanged();
 
