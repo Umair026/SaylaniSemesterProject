@@ -122,42 +122,42 @@ public class MainActivity extends ActionBarActivity {
                 l_Password = loginPassword.getText().toString();
                 Toast.makeText(MainActivity.this,"l_Email:"+l_Email,Toast.LENGTH_SHORT).show();
 
-                FireBaseHandler.getInstance().getUserRef().addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                     Map<String,Object> data = (Map<String,Object>) dataSnapshot.getValue();
-                      String mail =  data.get("email").toString();
-                      String pass = data.get("password").toString();
-                        if(mail.equals(l_Email) && pass.equals(l_Password)){
-                            String fname = data.get("first-name").toString();
-                            String lname = data.get("last-name").toString();
-                             user = new User(fname, lname,mail,dataSnapshot.getKey().toString());
-
-                        }else{
-
-                        }
-                    }
-
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(FirebaseError firebaseError) {
-
-                    }
-                });
+//                FireBaseHandler.getInstance().getUserRef().addChildEventListener(new ChildEventListener() {
+//                    @Override
+//                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//                     Map<String,Object> data = (Map<String,Object>) dataSnapshot.getValue();
+//                      String mail =  data.get("email").toString();
+//                      String pass = data.get("password").toString();
+//                        if(mail.equals(l_Email) && pass.equals(l_Password)){
+//                            String fname = data.get("first-name").toString();
+//                            String lname = data.get("last-name").toString();
+//                             user = new User(fname, lname,mail,dataSnapshot.getKey().toString());
+//
+//                        }else{
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(FirebaseError firebaseError) {
+//
+//                    }
+//                });
 
 //                    AuthServices.Login(loginEmail.getText().toString(),loginPassword.getText().toString(), new ServiceListener<User>() {
 //                        @Override

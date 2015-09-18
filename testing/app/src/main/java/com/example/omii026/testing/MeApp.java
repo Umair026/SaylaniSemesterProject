@@ -11,6 +11,9 @@ import com.firebase.client.Firebase;
  */
 public class MeApp extends Application {
 
+    final static private String APP_KEY = "0rsqerm8ejdsucf";
+    final static private String APP_SECRET = "drd7bz4ta4wtvuw";
+
     private static User appUser;
     private static Context context;
 
