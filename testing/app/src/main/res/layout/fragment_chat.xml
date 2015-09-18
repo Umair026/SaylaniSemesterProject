@@ -72,10 +72,11 @@
         <EditText
             android:layout_marginTop="5dp"
             android:background="@android:drawable/divider_horizontal_dim_dark"
-            android:hint="      Text message"
+            android:hint=" Text message"
             android:id="@+id/chat_Text"
             android:lines="3"
             android:textColor="#fff"
+            android:drawableLeft="@android:drawable/ic_menu_camera"
             android:textColorHint="#fff"
             android:layout_toLeftOf="@+id/chat_sent"
             android:layout_toRightOf="@+id/chat_emotions"
@@ -94,7 +95,7 @@
             android:layout_marginTop="8dp"
             android:id="@+id/chat_emotions"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/ic_favorite_border_white_24dp"
+            android:src="@android:drawable/ic_menu_sort_by_size"
             android:layout_width="50dp"
             android:layout_height="40dp" />
 

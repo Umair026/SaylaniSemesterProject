@@ -1,9 +1,54 @@
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:background="@drawable/images"
+        android:id="@+id/drawerHader"
+        android:layout_width="match_parent"
+        android:layout_height="160dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_circular_image"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginLeft="10dp"
+           android:layout_above="@+id/drawerUserName"
+            android:src="@drawable/default_user"
+            app:border_color="#EC1C24"
+            app:border_width="2dp" />
+
+        <TextView
+            android:text="UserName"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="50dp"
+            android:textSize="16dp"
+            android:textColor="#fff"
+            android:id="@+id/drawerUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        </RelativeLayout>
+    <View
+        android:id="@+id/view_drawer"
+        android:layout_below="@id/drawerHader"
+        android:layout_width="wrap_content"
+        android:layout_height="5dp"
+        android:background="@drawable/view_drawable"/>
+
+
+<ListView
+    android:layout_below="@id/view_drawer"
+    android:id="@+id/drawerList"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:choiceMode="singleChoice"
     android:divider="@android:color/transparent"
     android:dividerHeight="0dp"
-    android:background="#cccc"
+    android:background="#fff"
     tools:context="com.example.omii026.testing.Activities.NavigationDrawerFragment" />
+</RelativeLayout>

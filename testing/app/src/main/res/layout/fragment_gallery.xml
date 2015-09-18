@@ -49,16 +49,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <ImageView
+            android:id="@+id/imageShow"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_above="@+id/galleryListView"
+            android:layout_marginBottom="30dp"
+            android:layout_centerHorizontal="true" />
         <ImageView
             android:id="@+id/camera"
-            android:background="@android:drawable/ic_menu_camera"
+            android:background="@drawable/ic_gallery"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             />
+
+        <com.example.omii026.testing.SupportClasses.HorizontalListView
+            android:layout_width="match_parent"
+            android:id="@+id/galleryListView"
+            android:layout_height="80dp"
+            android:padding="5dp"
+            android:layout_alignParentBottom="true"/>
+
+        <View
+            android:id="@+id/view1"
+            android:layout_above="@+id/galleryListView"
+            android:background="@drawable/view_drawable"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"/>
 
     </RelativeLayout>
 

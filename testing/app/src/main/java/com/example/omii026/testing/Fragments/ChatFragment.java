@@ -60,6 +60,7 @@ public class ChatFragment extends Fragment {
     private UserChatAdapter userChatAdapter;
     private ArrayList<ChatData> textMessage = new ArrayList<>();
     private static final String TAG = "ChatFragment";
+    private Firebase newRef;
 
 
     // TODO: Rename and change types and number of parameters
@@ -160,23 +161,21 @@ public class ChatFragment extends Fragment {
                                 Log.d("no null",""+dataSnapshot.getValue());
                                     HashMap<String,Object> dataSnap = (HashMap<String, Object>) dataSnapshot.getValue();
                                             String ref = (String) dataSnap.get(mParam2);
-                                Firebase mRef = FireBaseHandler.getInstance().getConversationRef()
+                                 newRef = FireBaseHandler.getInstance().getConversationRef()
                                         .child(ref).push();
-                                textMap.put("key", mRef.getKey());
-                                Log.d("sent msg Key:",""+mRef.getKey());
-                                mRef.setValue(textMap);
+                                textMap.put("key", newRef.getKey());
+                                Log.d("sent msg Key:", "" + newRef.getKey());
+                                newRef.setValue(textMap);
                                 chat_text.setText("");
                               }else {
                                 Log.d("null",""+dataSnapshot.getValue());
 
-                                Firebase newRef = FireBaseHandler.getInstance().getConversationRef().push();
+                                 newRef = FireBaseHandler.getInstance().getConversationRef().push();
 
                                 Firebase mRef = newRef.push();
                                 textMap.put("key",mRef.getKey());
                                 mRef.setValue(textMap);
-//                                String Ref = newRef.toString();
-//                                Ref = Ref.substring(Ref.length() - 20);
-//
+
                                 HashMap<String,String> chatOtherRef = new HashMap<String, String>();
                                 chatOtherRef.put(mParam2, newRef.getKey());
                                 FireBaseHandler.getInstance().getUserChatRef().child(MeApp.getAppUser().getUserId())
@@ -269,8 +268,8 @@ public class ChatFragment extends Fragment {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                ChatData a =textMessage.remove(i);
                 userChatAdapter.notifyDataSetChanged();
-//                FireBaseHandler.getInstance().getConversationRef().child(a.getKey()).removeValue();
-
+                FireBaseHandler.getInstance().getConversationRef()
+                        .child(newRef.getKey()).child(a.getKey()).removeValue();
 
                 return false;
             }

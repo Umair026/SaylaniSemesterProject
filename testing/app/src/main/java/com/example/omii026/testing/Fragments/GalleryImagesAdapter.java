@@ -27,7 +27,7 @@ public class GalleryImagesAdapter extends BaseAdapter {
         this.context = context;
         this.array = array;
         this.bitmapsList = bitmapsList;
-        inflater = ((Activity)context).getLayoutInflater();
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override

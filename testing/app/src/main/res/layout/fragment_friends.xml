@@ -53,17 +53,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="248dp" />
 
-    <SearchView
-        android:id="@+id/frnd_search"
-        android:layout_below="@+id/view_friends"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        </SearchView>
 
     <ListView
         android:id="@+id/frndChatList"
-        android:layout_below="@+id/frnd_search"
+        android:layout_below="@+id/view_friends"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

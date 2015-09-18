@@ -30,6 +30,7 @@ public class Home extends Fragment {
     // TODO: Rename and change types of parameters
     private String Item;
     private View rootView;
+    private TextView UserName;
 
     private ImageView imageView;
     private DrawerLayout mDrawerLayout;
@@ -72,7 +73,7 @@ public class Home extends Fragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavigationDrawerFragment.mDrawerLayout.openDrawer(NavigationDrawerFragment.mDrawerListView);
+                NavigationDrawerFragment.mDrawerLayout.openDrawer(NavigationDrawerFragment.rootView);
             }
         });
 

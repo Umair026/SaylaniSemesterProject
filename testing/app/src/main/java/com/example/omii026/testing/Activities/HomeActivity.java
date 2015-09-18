@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -33,7 +34,7 @@ import com.example.omii026.testing.SupportClasses.UserData;
 
 import java.security.acl.Group;
 
-public class HomeActivity extends ActionBarActivity implements
+public class HomeActivity extends AppCompatActivity implements
         NavigationDrawerFragment.NavigationDrawerCallbacks,
         Home.onFragmentInteractionListener,
         Groups.OnFragmentInteractionListener,

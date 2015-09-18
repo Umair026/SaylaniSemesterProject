@@ -19,11 +19,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.omii026.testing.Firebase.FireBaseHandler;
+import com.example.omii026.testing.Fragments.ChatFragment;
+import com.example.omii026.testing.MeApp;
 import com.example.omii026.testing.SupportClasses.DrawerItem;
 import com.example.omii026.testing.Fragments.NavigationAdapter;
 import com.example.omii026.testing.R;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
+import java.util.HashMap;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -60,6 +69,8 @@ public class NavigationDrawerFragment extends Fragment {
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
+    public static View rootView;
+    private TextView userName;
 
     public NavigationDrawerFragment() {
     }
@@ -92,17 +103,18 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mDrawerListView = (ListView) inflater.inflate(
-                R.layout.fragment_navigation_drawer, container, false);
+         rootView =  inflater.inflate(R.layout.fragment_navigation_drawer, container, true);
+        userName = (TextView) rootView.findViewById(R.id.drawerUserName);
+        mDrawerListView = (ListView) rootView.findViewById(R.id.drawerList);
+
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
              @Override
              public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                 mDrawerLayout.closeDrawer(mDrawerListView);
+                 mDrawerLayout.closeDrawer(rootView);
                  Log.d("in drawer",""+adapterView.getAdapter().getItem(i).toString());
                  gettingItem(adapterView.getAdapter().getItem(i).toString());
              }
               });
-
                 mDrawerListView.setAdapter(new NavigationAdapter(getActivity()));
 
     NavigationAdapter.add(new DrawerItem("Home"));
@@ -113,8 +125,9 @@ public class NavigationDrawerFragment extends Fragment {
     NavigationAdapter.add(new DrawerItem("Find_Friends"));
     NavigationAdapter.add(new DrawerItem("Music_Player"));
     NavigationAdapter.add(new DrawerItem("About_us"));
+//        userName.setText(MeApp.getAppUser().getUserId());
 
-        return mDrawerListView;
+        return rootView;
     }
 
     private void gettingItem(String Item) {

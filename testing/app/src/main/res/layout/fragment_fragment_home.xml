@@ -13,7 +13,7 @@
         android:layout_height="48dp"
         android:background="@drawable/toolbar_bg"
         android:minHeight="?attr/actionBarSize"
-        app:theme="@style/Base.Theme.AppCompat">
+        app:theme="@style/Base.Theme.AppCompat.CompactMenu">
 
         <ImageView
             android:layout_alignParentLeft="true"
@@ -22,7 +22,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:id="@+id/ic_nav"
-            android:background="@drawable/ic_keyboard_backspace_white_18dp"
+            android:background="@drawable/ic_view_headline_white_18dp"
             />
 
         <TextView
@@ -38,12 +38,22 @@
 
         <ImageView
             android:layout_alignParentRight="true"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
             android:id="@+id/ic_user"
             android:background="@drawable/ic_supervisor_account_white_18dp"
+            />
+
+        <ImageView
+            android:layout_toLeftOf="@+id/ic_user"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/ic_notification"
+            android:background="@android:drawable/ic_popup_reminder"
             />
 
     </RelativeLayout>
