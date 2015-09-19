@@ -89,13 +89,20 @@ public class Home extends Fragment {
         // Inflate the layout for this fragment
         Log.d("umair","Umair G");
         rootView =  inflater.inflate(R.layout.fragment_fragment_home, container, false);
+        ((Button) rootView.findViewById(R.id.dropbox)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener = (onFragmentInteractionListener) getActivity();
+                mListener.OpenDropox();
+            }
+        });
 
-        Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.drawable.ic_gallery);
-        ByteArrayOutputStream bYte = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG,100,bYte);
-        byte[] byteArray = bYte.toByteArray();
-        final String imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
-        Log.d("umair",""+imageFile);
+//        Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.drawable.ic_gallery);
+//        ByteArrayOutputStream bYte = new ByteArrayOutputStream();
+//        bmp.compress(Bitmap.CompressFormat.PNG,100,bYte);
+//        byte[] byteArray = bYte.toByteArray();
+//        final String imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
+//        Log.d("umair",""+imageFile);
 //        FireBaseHandler.getInstance().getUserRef().child(MeApp.getAppUser().getUserId()).child("profile-image").setValue(imageFile);
 
         imageView = (ImageView) rootView.findViewById(R.id.ic_nav);
@@ -105,22 +112,22 @@ public class Home extends Fragment {
                 NavigationDrawerFragment.mDrawerLayout.openDrawer(NavigationDrawerFragment.rootView);
             }
         });
-        ((Button) rootView.findViewById(R.id.button)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FireBaseHandler.getInstance().getUserRef().child(MeApp.getAppUser().getUserId()).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(FirebaseError firebaseError) {
-
-                    }
-                });
-            }
-        });
+//        ((Button) rootView.findViewById(R.id.button)).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                FireBaseHandler.getInstance().getUserRef().child(MeApp.getAppUser().getUserId()).addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(FirebaseError firebaseError) {
+//
+//                    }
+//                });
+//            }
+//        });
 
         groupIcon = (ImageView) rootView.findViewById(R.id.ic_user);
         groupIcon.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +143,7 @@ public class Home extends Fragment {
 
     public interface onFragmentInteractionListener{
         void UserFragment();
+        void OpenDropox();
     }
 
 }

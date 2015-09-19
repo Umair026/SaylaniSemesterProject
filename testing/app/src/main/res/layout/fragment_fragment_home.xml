@@ -77,7 +77,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <Button
-            android:id="@+id/button"
+            android:id="@+id/dropbox"
+            android:text="Dropbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

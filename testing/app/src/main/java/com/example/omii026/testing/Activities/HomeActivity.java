@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.example.omii026.testing.Fragments.ChatFragment;
 import com.example.omii026.testing.Fragments.FindFriends;
+import com.example.omii026.testing.Fragments.FragmentDropbox;
 import com.example.omii026.testing.Fragments.Friends;
 import com.example.omii026.testing.Fragments.Gallery;
 import com.example.omii026.testing.Fragments.GroupChatFragment;
@@ -200,6 +201,12 @@ private static DrawerLayout mDrawerLayout;
     public void UserFragment() {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.container,new FindFriends()).addToBackStack(null).commit();
+    }
+
+    @Override
+    public void OpenDropox() {
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.container, new FragmentDropbox()).addToBackStack(null).commit();
     }
 
     @Override
