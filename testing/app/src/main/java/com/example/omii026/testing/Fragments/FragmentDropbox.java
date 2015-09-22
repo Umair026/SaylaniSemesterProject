@@ -16,11 +16,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
+import android.os.Handler;
+
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
-import com.dropbox.client2.session.Session.AccessType;
 import com.dropbox.client2.session.TokenPair;
 
 
@@ -28,10 +31,10 @@ import com.dropbox.client2.session.Session;
 import com.example.omii026.testing.R;
 
 import java.util.ArrayList;
-import java.util.logging.Handler;
+//import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
-public class FragmentDropbox extends Fragment {
+public class FragmentDropbox extends Fragment  {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -83,10 +86,10 @@ public class FragmentDropbox extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
        view = inflater.inflate(R.layout.fragment_fragment_dropbox,container,false);
-        contain = (LinearLayout) view.findViewById(R.id.container_files);
+//        contain = (LinearLayout) view.findViewById(R.id.container_files);
         uploadFileBtn = (Button) view.findViewById(R.id.upload);
         loginBtn = (Button) view.findViewById(R.id.login);
-        listFilesBtn = (Button) view.findViewById(R.id.listFile);
+//        listFilesBtn = (Button) view.findViewById(R.id.listFile);
 
 
         ((Button) view.findViewById(R.id.login)).setOnClickListener(new View.OnClickListener() {
@@ -109,14 +112,14 @@ public class FragmentDropbox extends Fragment {
                 upload.execute();
             }
         });
-        ((Button) view.findViewById(R.id.listFile)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                DropboxFileList listFiles = new ListFiles(dropbox, FILE_DIR,
-//                        handler);
-//                listFiles.execute();
-            }
-        });
+//        ((Button) view.findViewById(R.id.listFile)).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                DropboxFileList listFiles = new DropboxFileList(dropbox, FILE_DIR,
+////                        handler);
+////                listFiles.execute();
+//            }
+//        });
         loggedIn(false);
 
         AppKeyPair appKeyPair = new AppKeyPair(ACCESS_KEY,ACCESS_SECRET);
@@ -128,40 +131,23 @@ public class FragmentDropbox extends Fragment {
 
         if(key != null && secret != null){
             AccessTokenPair token =  new AccessTokenPair(key,secret);
-            session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE,token);
+            session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE.APP_FOLDER,token);
         }else{
-            session = new AndroidAuthSession(appKeyPair,ACCESS_TYPE);
+            session = new AndroidAuthSession(appKeyPair,ACCESS_TYPE.APP_FOLDER);
         }
         dropbox =new DropboxAPI(session);
-
-
 
         return view;
     }
 
     private final Handler handler = new Handler() {
-        @Override
-        public void close() {
-
-        }
-
-        @Override
-        public void flush() {
-
-        }
-
-        @Override
-        public void publish(LogRecord record) {
-
-        }
-
         public void handleMessage(Message msg) {
             ArrayList<String> result = msg.getData().getStringArrayList("data");
             for (String fileName : result) {
                 Log.i("ListFiles", fileName);
-                TextView tv = new TextView(getActivity().getApplicationContext());
+                TextView tv = new TextView(getActivity());
                 tv.setText(fileName);
-                contain.addView(tv);
+//                contain.addView(tv);
             }
         }
     };
@@ -170,11 +156,11 @@ public class FragmentDropbox extends Fragment {
 
         isUserLoggedIn = userLoggedIn;
         uploadFileBtn.setEnabled(userLoggedIn);
-        uploadFileBtn.setBackgroundColor(userLoggedIn ? Color.BLUE : Color.GRAY);
+//        uploadFileBtn.setBackgroundColor(userLoggedIn ? Color.BLUE : Color.GRAY);
 
-        listFilesBtn.setEnabled(userLoggedIn);
+//        listFilesBtn.setEnabled(userLoggedIn);
 
-        listFilesBtn.setBackgroundColor(userLoggedIn ? Color.BLUE : Color.GRAY);
+//        listFilesBtn.setBackgroundColor(userLoggedIn ? Color.BLUE : Color.GRAY);
         loginBtn.setText(userLoggedIn ? "Logout" : "Log in");
 
     }

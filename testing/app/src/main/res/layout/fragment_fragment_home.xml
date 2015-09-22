@@ -68,19 +68,38 @@
 
 
 
-    <LinearLayout
+    <RelativeLayout
         android:background="#fff"
         android:layout_below="@id/view_home"
         android:orientation="vertical"
         android:id="@+id/hone_container"
-        android:gravity="center_horizontal|center_vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <Button
             android:id="@+id/dropbox"
             android:text="Dropbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textColor="#fff"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="#0055ff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            />
+        <Button
+            android:id="@+id/facebook"
+            android:text="facebook"
+            android:textColor="#fff"
+            android:layout_above="@+id/dropbox"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="#0033ff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_centerHorizontal="true" />
 
         <ImageView
             android:id="@+id/abc"
@@ -91,10 +110,12 @@
             android:layout_width="wrap_content"
             android:text="YOur Home Page"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
 
-    </LinearLayout>
+            android:layout_above="@+id/facebook"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="171dp" />
+
+    </RelativeLayout>
 
 
 

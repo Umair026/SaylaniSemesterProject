@@ -50,5 +50,6 @@
     android:divider="@android:color/transparent"
     android:dividerHeight="0dp"
     android:background="#fff"
-    tools:context="com.example.omii026.testing.Activities.NavigationDrawerFragment" />
+    tools:context="com.example.omii026.testing.Activities.NavigationDrawerFragment"/>
+
 </RelativeLayout>
