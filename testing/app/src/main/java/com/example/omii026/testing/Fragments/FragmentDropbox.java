@@ -1,5 +1,6 @@
 package com.example.omii026.testing.Fragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -16,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import android.os.Handler;
@@ -57,6 +59,7 @@ public class FragmentDropbox extends Fragment  {
     private Button loginBtn;
     private DropboxAPI dropbox;
     private LinearLayout contain;
+    private File selectedFile;
 
     // TODO: Rename and change types and number of parameters
     public static FragmentDropbox newInstance(String param1, String param2) {
@@ -108,18 +111,24 @@ public class FragmentDropbox extends Fragment  {
             public void onClick(View v) {
 
                 UploadFileToDropbox upload = new UploadFileToDropbox(getActivity(), dropbox,
-                        FILE_DIR);
+                        FILE_DIR,selectedFile);
                 upload.execute();
             }
         });
-//        ((Button) view.findViewById(R.id.listFile)).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                DropboxFileList listFiles = new DropboxFileList(dropbox, FILE_DIR,
-////                        handler);
-////                listFiles.execute();
-//            }
-//        });
+        ((Button) view.findViewById(R.id.loadFile)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("file/*");
+//                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                startActivityForResult(intent, 0);
+
+//                DropboxFileList listFiles = new DropboxFileList(dropbox, FILE_DIR,
+//                        handler);
+//                listFiles.execute();
+            }
+        });
         loggedIn(false);
 
         AppKeyPair appKeyPair = new AppKeyPair(ACCESS_KEY,ACCESS_SECRET);
@@ -163,6 +172,15 @@ public class FragmentDropbox extends Fragment  {
 //        listFilesBtn.setBackgroundColor(userLoggedIn ? Color.BLUE : Color.GRAY);
         loginBtn.setText(userLoggedIn ? "Logout" : "Log in");
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 0 && resultCode==getActivity().RESULT_OK) {
+           selectedFile = new File(data.getData().getPath());
+
+        }
     }
 
     @Override

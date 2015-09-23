@@ -20,12 +20,14 @@ public class UploadFileToDropbox extends AsyncTask<Void,Void,Boolean> {
     private DropboxAPI dropboxApi;
     private String path;
     private Context context;
+    private File selectedFile;
 
     public UploadFileToDropbox(Context context, DropboxAPI dropboxApi,
-                      String path) {
+                      String path,File selectedFile) {
         this.context = context.getApplicationContext();
         this.dropboxApi = dropboxApi;
         this.path = path;
+        this.selectedFile = selectedFile;
     }
 
     @Override
@@ -36,79 +38,22 @@ public class UploadFileToDropbox extends AsyncTask<Void,Void,Boolean> {
 
         try {
             // Creating a temporal file.
-            tempFileToUploadToDropbox = File.createTempFile("hello_world", ".txt", tempDropboxDirectory);
-            fileWriter = new FileWriter(tempFileToUploadToDropbox);
-            fileWriter.write("Hello World drom Android Dropbox Implementation nasdlgvnadlvnaln aeojiwj " +
-                    "v[pjfa9mvaiopmuiovanutiopquby iopuanvpuydspov8fgqmpfov8wyv aipuvnipu dynp8 am v8aiosu8ynv " +
-                    "piuwspiuvsnpiucy wipurynpw i rtaipuwbypv89n piufpiuvnysuirnyaewipuvrniuwaecntiytvipusvn tgiuaviuy" +
-                    "niugcnipuepwiucrxn eiuwar cgeqwtriuvqwegh vwe bc8iqw ipuchiprucnvipurnptgiugv fgviwbfviueqwgtfp78uqegwhc" +
-                    "fiubewhifgqeipu2fgbehjwbvfuyvgwqduyfbgqihebgiuqreghwfiubwdjkbfiuqwghfiueq2bfeqwgfhq34jkbfgvequwghcioue ry89[e" +
-                    "vbip7ewnr[oieqwh crycqwgbeqw ipruceqwiurbveqwipucn eqwiugrtbeqw iuftiqweu cfgdehfgvuvbch3rbfhuvhdvfqhjgeiurteqw" +
-                    "ljqglrteqwljkfbdmnbfjlgfiluaewb cvehwruirytci rbgiv;eh;krejg ;kejqw bckehfcq3hgExjjjjjdskcvnsdklnvadklsnvklanvl'" +
-                    "anv'kansdmvkladnsvkladfhnsgkladfnsghasdioufhadiouwfhkuadjsbnvioudwghfouajsdbnfvjkadhsfojvbadsjkbhvjksadgfvuierwhfgu" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "hgiuruqwyepruiohqewr789234y65789y234hoqwncd4yp3489cnvy234rdyr423t6hy7j8es4cdrfvgbhjnkmwse4dr5ft6yguhijkos4edr5" +
-                    "ft6guy7huijkm[qhcn89wynryq2fhuydgcvyubdschjabdsvlqfetwy89frhbdvcipuqwert89ehwgfkuvgty    ew89ryiueqwgfdqwbcfhgdqwipuf e" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "jbdsauvhbriugbadfjksiurghjkdfsbvjkabdsjkvbgarwioughadfjksbvjaksdnbv;jabsdvjk;abdsvjk;abscnknvbcsjk;verwaioughuergeiru" +
-                    "wufheiquwfhehjwcvqytfr7123yfguample!");
-            fileWriter.close();
+//            tempFileToUploadToDropbox = File.createTempFile("hello_world", ".txt", tempDropboxDirectory);
+//            fileWriter = new FileWriter(tempFileToUploadToDropbox);
+//            fileWriter.write("Hello World drom Android Dropbox Implementation nasdlgvnadlvnaln aeojiwjwufheiquwfhehjwcvqytfr7123yfguample!");
+//            fileWriter.close();
 
             // Uploading the newly created file to Dropbox.
-            FileInputStream fileInputStream = new FileInputStream(tempFileToUploadToDropbox);
-            dropboxApi.putFile(path + "hello_world.txt", fileInputStream,
-                    tempFileToUploadToDropbox.length(), null, null);
+//            FileInputStream fileInputStream = new FileInputStream(tempFileToUploadToDropbox);
+//            dropboxApi.putFile(path + "hello_world.txt", fileInputStream,
+//                    tempFileToUploadToDropbox.length(), null, null);
 //            tempFileToUploadToDropbox.delete();
+
+            FileInputStream fileInputStream = new FileInputStream(selectedFile);
+            dropboxApi.putFile(path + selectedFile.getName(), fileInputStream,
+                    selectedFile.length(), null, null);
+
+
 
             return true;
         } catch (IOException e) {
