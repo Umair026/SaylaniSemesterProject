@@ -91,7 +91,7 @@ public class ChatFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_chat, container, false);
-        ((TextView)view.findViewById(R.id.title_chat)).setText(mParam2);
+//        ((TextView)view.findViewById(R.id.title_chat)).setText(mParam2);
 
         chat_sent = (ImageView) view.findViewById(R.id.chat_sent);
         chat_text = (TextView) view.findViewById(R.id.chat_Text);
@@ -181,7 +181,7 @@ public class ChatFragment extends Fragment {
                                 FireBaseHandler.getInstance().getUserChatRef().child(MeApp.getAppUser().getUserId())
                                         .child(mParam2).setValue(chatOtherRef);
 
-                                HashMap<String,String> chatUserRef = new HashMap<String, String>();
+                                    HashMap<String,String> chatUserRef = new HashMap<String, String>();
                                 chatUserRef.put(MeApp.getAppUser().getUserId(), newRef.getKey());
                                 FireBaseHandler.getInstance().getUserChatRef().child(mParam2)
                                         .child(MeApp.getAppUser().getUserId()).setValue(chatUserRef);

@@ -29,6 +29,12 @@ public class ChatData {
         this.timestamp = timestamp;
     }
 
+    public ChatData(String message,String senderId,String key){
+        this.msg = message;
+        this.senderId = senderId;
+        this.key = key;
+    }
+
     public String getKey() {
         return key;
     }
