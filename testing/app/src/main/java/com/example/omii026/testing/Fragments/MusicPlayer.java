@@ -81,8 +81,6 @@ public class MusicPlayer extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_music_player, container, false);
-        ( (TextView)view.findViewById(R.id.playerText)).setText(Item);
-        imageView = (ImageView) view.findViewById(R.id.ic_back_player);
         gridView = (GridView) view.findViewById(R.id.grid_view);
 
         mPlayerGridAdapter = new PlayerGridAdapter(getActivity(),lower_item,image_Id);
@@ -116,12 +114,7 @@ public class MusicPlayer extends Fragment {
 
 
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().popBackStackImmediate();
-            }
-        });
+
         return view;
     }
 

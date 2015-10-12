@@ -5,45 +5,12 @@
     android:layout_height="match_parent"
     android:background="#ddddff">
 
-    <RelativeLayout
-        android:id="@+id/toolbar_find"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@drawable/toolbar_bg"
-
-        android:minHeight="?attr/actionBarSize"
-        app:theme="@style/Base.Theme.AppCompat">
-
-        <ImageView
-            android:layout_alignParentLeft="true"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/ic_back_find"
-            android:background="@drawable/ic_keyboard_arrow_left_white_24dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/title_appbar"
-            android:text="Find Friends"
-            android:textColor="#fff"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
-    </RelativeLayout>
-    <View
-        android:id="@+id/view_find"
-        android:layout_below="@id/toolbar_find"
-        android:layout_width="wrap_content"
-        android:layout_height="7dp"
-        android:background="@drawable/view_drawable"/>
-
+   <SearchView
+       android:id="@+id/searchFriends"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
   <ListView
-      android:layout_below="@+id/view_find"
+      android:layout_below="@+id/searchFriends"
       android:id="@+id/Umair"
       android:layout_width="match_parent"
       android:layout_height="match_parent"/>

@@ -117,9 +117,9 @@ public class NavigationDrawerFragment extends Fragment {
               });
                 mDrawerListView.setAdapter(new NavigationAdapter(getActivity()));
 
-    NavigationAdapter.add(new DrawerItem("Home"));
-    NavigationAdapter.add(new DrawerItem("Friends"));
-    NavigationAdapter.add(new DrawerItem("Groups"));
+//    NavigationAdapter.add(new DrawerItem("Home"));
+//    NavigationAdapter.add(new DrawerItem("Friends"));
+//    NavigationAdapter.add(new DrawerItem("Groups"));
     NavigationAdapter.add(new DrawerItem("Gallery"));
     NavigationAdapter.add(new DrawerItem("Map"));
     NavigationAdapter.add(new DrawerItem("Find_Friends"));
@@ -132,15 +132,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     private void gettingItem(String Item) {
         mCallbacks = (NavigationDrawerCallbacks) getActivity();
-        if(Item.equals("Home")){
-            mCallbacks.onHomeClick(Item);
-        }else if(Item.equals("Friends")){
-            mCallbacks.onFriendsClick(Item);
-        }
-        else if(Item.equals("Groups")){
-            mCallbacks.onGroupClick(Item);
-        }
-        else if(Item.equals("Gallery")){
+         if(Item.equals("Gallery")){
             mCallbacks.onGalleryClick(Item);
         }
         else if(Item.equals("Map")){

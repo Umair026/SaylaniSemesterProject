@@ -58,7 +58,6 @@ private ArrayList<Bitmap> bitmapsList = new ArrayList<>();
         galleryList = (HorizontalListView) view.findViewById(R.id.galleryListView);
         imageView = (ImageView) view.findViewById(R.id.camera);
         imageShow = (ImageView) view.findViewById(R.id.imageShow);
-        imageView2 = (ImageView) view.findViewById(R.id.ic_back_gallery);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,12 +67,7 @@ private ArrayList<Bitmap> bitmapsList = new ArrayList<>();
             }
         });
 
-        imageView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().popBackStackImmediate();
-            }
-        });
+
 
         galleryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

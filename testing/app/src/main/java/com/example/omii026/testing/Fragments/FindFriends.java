@@ -78,7 +78,6 @@ public class FindFriends extends Fragment {
         // Inflate the layout for this fragment
           view =  inflater.inflate(R.layout.fragment_find_friends, container, false);
          listView = (ListView) view.findViewById(R.id.Umair);
-         imageView = (ImageView) view.findViewById(R.id.ic_back_find);
 
 
         FireBaseHandler.getInstance().getUserRef().addChildEventListener(new ChildEventListener() {
@@ -116,12 +115,7 @@ public class FindFriends extends Fragment {
         listView.setAdapter(findFriendListAdapter);
         findFriendListAdapter.notifyDataSetChanged();
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().popBackStackImmediate();
-            }
-        });
+
 
     return view;
     }
