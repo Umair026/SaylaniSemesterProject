@@ -18,11 +18,21 @@
         <ImageView
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-
             android:background="@android:drawable/ic_menu_gallery"
             android:id="@+id/groupChatImage"
             android:layout_width="40dp"
             android:layout_height="45dp" />
+
+        <TextView
+            android:id="@+id/senderName"
+            android:text="name"
+            android:maxWidth="48dp"
+            android:textColor="#fff"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_below="@+id/groupChatImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 <RelativeLayout
     android:layout_toLeftOf="@id/groupChatImage"
     android:background="@drawable/gchat_item_bg"
@@ -43,7 +53,6 @@
 
         <TextView
             android:layout_marginRight="5dp"
-
             android:id="@+id/groupChatTime"
             android:layout_below="@id/groupChatText"
             android:layout_alignParentRight="true"

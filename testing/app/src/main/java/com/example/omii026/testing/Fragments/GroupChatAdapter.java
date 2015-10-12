@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.omii026.testing.R;
+import com.example.omii026.testing.SupportClasses.ChatData;
+import com.example.omii026.testing.SupportClasses.GroupChatData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,20 +26,22 @@ public class GroupChatAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private EditText chat_text;
     private ImageView chat_sent;
+    private ArrayList<ChatData> listData;
 
-    public GroupChatAdapter(Context context){
+    public GroupChatAdapter(Context context,ArrayList<ChatData> listData){
         this.context = context;
+        this.listData = listData;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return groupItemList.size();
+        return listData.size();
     }
 
     @Override
-    public String getItem(int i) {
-        return groupItemList.get(i);
+    public ChatData getItem(int i) {
+        return listData.get(i);
     }
 
     @Override
@@ -51,9 +55,9 @@ public class GroupChatAdapter extends BaseAdapter {
         if(view == null){
             view = inflater.inflate(R.layout.group_chat_item,viewGroup,false);
         }
-        ((TextView) view.findViewById(R.id.groupChatText)).setText(getItem(i));
-
-
+        ((TextView) view.findViewById(R.id.groupChatText)).setText(getItem(i).getMsg());
+        ((TextView) view.findViewById(R.id.senderName)).setText("owner:"+getItem(i).getSenderId());
+        ((TextView) view.findViewById(R.id.groupChatTime)).setText(getItem(i).getTimestamp()+"");
         return view;
     }
 }

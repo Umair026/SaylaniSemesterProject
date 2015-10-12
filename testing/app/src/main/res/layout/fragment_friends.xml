@@ -6,38 +6,37 @@
     android:background="#fff"
 
     tools:context="com.example.omii026.me.Fragments.Home">
-    <RelativeLayout
-        android:id="@+id/toolbar_friends"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@drawable/toolbar_bg"
-        android:minHeight="?attr/actionBarSize"
-        app:theme="@style/Base.Theme.AppCompat">
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/toolbar_friends"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:background="@drawable/toolbar_bg"-->
+        <!--android:minHeight="?attr/actionBarSize"-->
+        <!--app:theme="@style/Base.Theme.AppCompat">-->
 
-        <ImageView
-            android:layout_alignParentLeft="true"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/ic_back_friends"
-            android:background="@drawable/ic_keyboard_arrow_left_white_24dp"
-            />
+        <!--<ImageView-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:id="@+id/ic_back_friends"-->
+            <!--android:background="@drawable/ic_keyboard_arrow_left_white_24dp"-->
+            <!--/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/title_appbar"
-            android:text="Friends"
-            android:textColor="#fff"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
-    </RelativeLayout>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/title_appbar"-->
+            <!--android:text="Friends"-->
+            <!--android:textColor="#fff"-->
+            <!--android:textSize="20sp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_centerHorizontal="true" />-->
+    <!--</RelativeLayout>-->
     <View
         android:id="@+id/view_friends"
-        android:layout_below="@id/toolbar_friends"
         android:layout_width="wrap_content"
         android:layout_height="7dp"
         android:background="@drawable/view_drawable"/>

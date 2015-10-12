@@ -13,6 +13,9 @@ public class FireBaseHandler {
     private Firebase userChatRef;
     private Firebase conversationRef;
     private Firebase friendshipRef;
+    private Firebase groupRef;
+    private Firebase userGroupRef;
+    private Firebase groupChatRef;
 
 
 
@@ -50,5 +53,15 @@ public class FireBaseHandler {
     }
     public Firebase getFriendshipRef() {
         return friendshipRef = mFirebaseRef.child("friendship");
+    }
+
+    public Firebase getGroupRef(){
+        return groupRef = mFirebaseRef.child("groups");
+    }
+    public Firebase getUserGroupRef() {
+        return userGroupRef = mFirebaseRef.child("user-groups");
+    }
+    public Firebase getGroupChatRef(){
+        return groupChatRef = mFirebaseRef.child("group-chat");
     }
 }

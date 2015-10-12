@@ -7,66 +7,63 @@
     android:id="@+id/fragment_home_container"
     tools:context="com.example.omii026.testing.Activities.HomeActivity$PlaceholderFragment">
 
-    <RelativeLayout
-        android:id="@+id/toolbar_home"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@drawable/toolbar_bg"
-        android:minHeight="?attr/actionBarSize"
-        app:theme="@style/Base.Theme.AppCompat.CompactMenu">
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/toolbar_home"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:background="@drawable/toolbar_bg"-->
+        <!--android:minHeight="?attr/actionBarSize"-->
+        <!--app:theme="@style/Base.Theme.AppCompat.CompactMenu">-->
 
-        <ImageView
-            android:layout_alignParentLeft="true"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/ic_nav"
-            android:background="@drawable/ic_view_headline_white_18dp"
-            />
+        <!--<ImageView-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:id="@+id/ic_nav"-->
+            <!--android:background="@drawable/ic_view_headline_white_18dp"-->
+            <!--/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/title_appbar"
-            android:text="**  ME  **"
-            android:textColor="#fff"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/title_appbar"-->
+            <!--android:text="  ME APP  "-->
+            <!--android:textColor="#fff"-->
+            <!--android:textSize="20sp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_centerHorizontal="true" />-->
 
-        <ImageView
-            android:layout_alignParentRight="true"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/ic_user"
-            android:background="@drawable/ic_supervisor_account_white_18dp"
-            />
+        <!--<ImageView-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:id="@+id/ic_user"-->
+            <!--android:background="@drawable/ic_supervisor_account_white_18dp"-->
+            <!--/>-->
 
-        <ImageView
-            android:layout_toLeftOf="@+id/ic_user"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/ic_notification"
-            android:background="@android:drawable/ic_popup_reminder"
-            />
+        <!--<ImageView-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_toLeftOf="@+id/ic_user"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:id="@+id/ic_notification"-->
+            <!--android:background="@android:drawable/ic_popup_reminder"-->
+            <!--/>-->
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
     <View
         android:id="@+id/view_home"
-        android:layout_below="@id/toolbar_home"
         android:layout_width="wrap_content"
         android:layout_height="7dp"
         android:background="@drawable/view_drawable"/>
-
-
-
 
     <RelativeLayout
         android:background="#fff"
@@ -75,31 +72,6 @@
         android:id="@+id/hone_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <Button
-            android:id="@+id/dropbox"
-            android:text="Dropbox"
-            android:textColor="#fff"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="#0055ff"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            />
-        <Button
-            android:id="@+id/facebook"
-            android:text="facebook"
-            android:textColor="#fff"
-            android:layout_above="@+id/dropbox"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="#0033ff"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_centerHorizontal="true" />
 
         <ImageView
             android:id="@+id/abc"
@@ -110,13 +82,73 @@
             android:layout_width="wrap_content"
             android:text="YOur Home Page"
             android:layout_height="wrap_content"
-
-            android:layout_above="@+id/facebook"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="171dp" />
 
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="6dp"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/facebook"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="6dp"
+            android:background="@drawable/circular_fab"
+            android:layout_above="@+id/dropbox"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"/>
+        <ImageButton
+            android:id="@+id/dropbox"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_margin="6dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/circular_fab"
+            android:layout_above="@+id/btnFab"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"/>
 
+        <ImageButton
+            android:id="@+id/btnFab"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/ic_add_white_18dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/circular_fab"
+            />
+        <TextView
+            android:id="@+id/text2"
+            android:text="Facebook"
+            android:textStyle="bold|italic"
+            android:background="#fff"
+            android:visibility="gone"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/facebook"
+            android:layout_toLeftOf="@+id/facebook"
+             />
 
+        <TextView
+            android:id="@+id/text1"
+            android:textStyle="bold|italic"
+            android:text="Dropbox"
+            android:background="#fff"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_alignTop="@+id/dropbox"
+            android:layout_alignLeft="@+id/text2"
+            />
+
+    </RelativeLayout>
 
 </RelativeLayout>

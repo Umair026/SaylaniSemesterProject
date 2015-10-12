@@ -1,23 +1,43 @@
 package com.example.omii026.testing.Fragments;
 
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.omii026.testing.Firebase.FireBaseHandler;
+import com.example.omii026.testing.MeApp;
 import com.example.omii026.testing.R;
+import com.example.omii026.testing.Services.ServiceError;
+import com.example.omii026.testing.Services.ServiceListener;
+import com.example.omii026.testing.Services.UserService;
+import com.example.omii026.testing.SupportClasses.GroupChatData;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
-/**
- * A simple {@link android.app.Fragment} subclass.
- * Use the {@link com.example.omii026.testing.Fragments.Groups#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Groups extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,7 +51,13 @@ public class Groups extends Fragment {
     private ImageView imageView;
     private ImageView chat_icon;
     private OnFragmentInteractionListener mListener;
-
+    private ListView listView;
+    private ArrayList<GroupChatData> list = new ArrayList<>();
+    private Button create;
+    private EditText groupIdEditText,groupDescEditText;
+    private String desc,id;
+    private ProgressDialog progressDialog;
+    private GroupListAdapter adapter;
 
     // TODO: Rename and change types and number of parameters
     public static Groups newInstance(String param1) {
@@ -49,6 +75,8 @@ public class Groups extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("onCreate:", "Group");
+
         if (getArguments() != null) {
             Item = getArguments().getString(ARG_PARAM1);
         }
@@ -59,32 +87,167 @@ public class Groups extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_groups, container, false);
-        ( (TextView)view.findViewById(R.id.groupText)).setText(Item);
-        imageView = (ImageView) view.findViewById(R.id.ic_back_group);
-        chat_icon = (ImageView) view.findViewById(R.id.ic_chat);
+        create = (Button) view.findViewById(R.id.create_group);
+        listView = (ListView) view.findViewById(R.id.group_list);
 
-        imageView.setOnClickListener(new View.OnClickListener() {
+               Log.d("onCreateView:","Group");
+
+//        list.add("Group 1");
+//        list.add("Group 2");
+//        list.add("Group 3");
+//        list.add("Group 4");
+//        list.add("Group 5");
+//        list.add("Group 6");
+//        list.add("Group 7");
+//      Log.d("MeappUser:",MeApp.getAppUser().getPassword());
+//        if(MeApp.getAppUser() != null) {
+
+            FireBaseHandler.getInstance().getUserGroupRef().child(MeApp.getAppUser().getUserId())
+                    .addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                            if (dataSnapshot != null) {
+                                String groupKey = dataSnapshot.getKey();
+
+                                FireBaseHandler.getInstance().getGroupRef().child(groupKey)
+                                        .addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                if(dataSnapshot != null) {
+
+                                                    Log.d("dataSnapshot:", "" + dataSnapshot);
+                                                    HashMap<String, Object> data = (HashMap<String, Object>) dataSnapshot.getValue();
+                                                    String id = data.get("id").toString();
+                                                    String image = data.get("group-image").toString();
+                                                    String desc = data.get("desc").toString();
+                                                    String owner = data.get("created-by").toString();
+//
+                                                    GroupChatData groupChatData = new GroupChatData(id, desc, image, owner);
+                                                    list.add(groupChatData);
+                                                    adapter.notifyDataSetChanged();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(FirebaseError firebaseError) {
+                                                Toast.makeText(getActivity(), "" + firebaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+                            }
+                        }
+
+                        @Override
+                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(DataSnapshot dataSnapshot) {
+                            list.remove(dataSnapshot.getValue());
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(FirebaseError firebaseError) {
+
+                        }
+                    });
+
+        adapter = new GroupListAdapter(getActivity(),list);
+
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().popBackStackImmediate();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                GroupChatData groupChatData = (GroupChatData) parent.getItemAtPosition(position);
+                mListener = (OnFragmentInteractionListener) getActivity();
+                mListener.OpenGroupChatFragment(groupChatData.getGroupName());
             }
         });
 
 
 
-        chat_icon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener = (OnFragmentInteractionListener)getActivity();
-                mListener.OpenGroupChatFragment();
 
+        create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ShowDialog();
             }
         });
+
 
         return view;
     }
+
+    public void ShowDialog() {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.group_creation_dialog);
+
+        groupIdEditText = (EditText) dialog.findViewById(R.id.editGroupId);
+        groupDescEditText = (EditText) dialog.findViewById(R.id.editGroupDesc);
+
+        dialog.setCancelable(false);
+        ((Button) dialog.findViewById(R.id.creatButton)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                desc = groupDescEditText.getText().toString();
+                id = groupIdEditText.getText().toString();
+
+                if (!id.equals("") && !desc.equals("")) {
+
+                    progressDialog = ProgressDialog.show(getActivity(), "Group Creation", "Creating", true, false);
+
+                    GroupChatData groupChatData = new GroupChatData(id,desc,"noImage");
+       // Groupc cretion
+                    UserService.createGroup(groupChatData, new ServiceListener() {
+                        @Override
+                        public void success(Object object) {
+                            progressDialog.dismiss();
+                            dialog.dismiss();
+                            Toast.makeText(getActivity(), "Group created", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        @Override
+                        public void error(ServiceError serviceError) {
+                            progressDialog.dismiss();
+                            Toast.makeText(getActivity(), "Error" + serviceError.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                } else {
+                    Toast.makeText(getActivity(), "fields incomplete", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        ((ImageView) dialog.findViewById(R.id.cancel)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.d("onActivityCreated:", "Group");
+
+    }
+
     public interface OnFragmentInteractionListener{
-        void OpenGroupChatFragment();
+        void OpenGroupChatFragment(String ss);
     }
 
 

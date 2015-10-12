@@ -1,6 +1,9 @@
 package com.example.omii026.testing.Activities;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -9,6 +12,8 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,26 +25,40 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.omii026.testing.Class.User;
+import com.example.omii026.testing.Firebase.FireBaseHandler;
 import com.example.omii026.testing.Fragments.ChatFragment;
 import com.example.omii026.testing.Fragments.FindFriends;
 import com.example.omii026.testing.Fragments.FragmentDropbox;
 import com.example.omii026.testing.Fragments.Friends;
 import com.example.omii026.testing.Fragments.Gallery;
 import com.example.omii026.testing.Fragments.GroupChatFragment;
+import com.example.omii026.testing.Fragments.GroupListAdapter;
 import com.example.omii026.testing.Fragments.Groups;
 import com.example.omii026.testing.Fragments.Home;
+import com.example.omii026.testing.Fragments.MembersList;
 import com.example.omii026.testing.Fragments.MusicPlayer;
+import com.example.omii026.testing.Fragments.PagerAdapter;
+import com.example.omii026.testing.Fragments.PagerHome;
+import com.example.omii026.testing.MeApp;
 import com.example.omii026.testing.R;
+import com.example.omii026.testing.Services.MenuManagerService;
 import com.example.omii026.testing.SupportClasses.UserData;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.FirebaseError;
 
 import java.security.acl.Group;
+import java.util.HashMap;
 
-public class HomeActivity extends AppCompatActivity implements
+public class HomeActivity extends ActionBarActivity implements
         NavigationDrawerFragment.NavigationDrawerCallbacks,
         Home.onFragmentInteractionListener,
         Groups.OnFragmentInteractionListener,
-        Friends.OnFragmentInteractionListener    {
+        Friends.OnFragmentInteractionListener,
+        GroupListAdapter.AdapterInteface{
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -51,16 +70,31 @@ public class HomeActivity extends AppCompatActivity implements
      */
     private CharSequence mTitle;
 private static DrawerLayout mDrawerLayout;
+    public Toolbar toolbar;
+    private MenuManagerService menuManagerService = null;
+    private User user;
 //    private FragmentManager mFragmentManager = getSupportFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        menuManagerService = new MenuManagerService();
         setContentView(R.layout.activity_home);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(HomeActivity.this, "working", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
+
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
@@ -78,7 +112,7 @@ private static DrawerLayout mDrawerLayout;
 //                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
 //                .commit();
         fragmentManager.beginTransaction()
-                .replace(R.id.container,new Home())
+                .add(R.id.container, new PagerHome())
                 .commit();
     }
 
@@ -110,12 +144,13 @@ private static DrawerLayout mDrawerLayout;
             mFragmentManager.beginTransaction()
                     .add(R.id.container, Friends.newInstance(Item))
                     .addToBackStack(null).commit();
-
     }
 
     @Override
     public void onMapClick(String Item) {
 //TODO
+
+
     }
 
     @Override
@@ -176,6 +211,10 @@ private static DrawerLayout mDrawerLayout;
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.home, menu);
+            menuManagerService.setUpMenuItems(R.id.ic_nav);
+            menuManagerService.updateMenu();
+            menuManagerService.setMenu(menu);
+            menuManagerService.updateMenu();
             restoreActionBar();
             return true;
         }
@@ -210,9 +249,9 @@ private static DrawerLayout mDrawerLayout;
     }
 
     @Override
-    public void OpenGroupChatFragment() {
+    public void OpenGroupChatFragment(String ss) {
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, new GroupChatFragment()).addToBackStack(null).commit();
+                .add(R.id.container,GroupChatFragment.newInstance(ss)).addToBackStack(null).commit();
     }
 
     @Override
@@ -222,6 +261,15 @@ private static DrawerLayout mDrawerLayout;
                 .add(R.id.container, ChatFragment.newInstance("chat",uid))
                 .addToBackStack(null).commit();
     }
+
+    @Override
+    public void addGroupMember(String nam) {
+        FragmentManager mFragmentManager = getSupportFragmentManager();
+        mFragmentManager.beginTransaction()
+                .add(R.id.container, MembersList.newInstance(nam,""))
+                .addToBackStack(null).commit();
+    }
+
 
     /**
      * A placeholder fragment containing a simple view.

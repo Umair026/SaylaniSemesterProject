@@ -80,10 +80,10 @@ public class Friends extends Fragment {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_friends, container, false);
         ( (TextView)view.findViewById(R.id.friendText)).setText(Item);
-        imageView = (ImageView) view.findViewById(R.id.ic_back_friends);
+//        imageView = (ImageView) view.findViewById(R.id.ic_back_friends);
         listView = (ListView) view.findViewById(R.id.frndChatList);
 
-        friendsListAdapter = new FriendsListAdapter(getActivity().getApplicationContext(),frndList);
+        friendsListAdapter = new FriendsListAdapter(getActivity().getApplicationContext(),frndList,R.layout.user_list_item,2);
         listView.setAdapter(friendsListAdapter);
 
         FireBaseHandler.getInstance().getFriendshipRef().child(MeApp.getAppUser().getUserId()).addChildEventListener(new ChildEventListener() {
@@ -166,12 +166,12 @@ public class Friends extends Fragment {
 //         friendsListAdapter = new FriendsListAdapter(getActivity().getApplicationContext(),frndList);
 //        listView.setAdapter(friendsListAdapter);
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().popBackStackImmediate();
-            }
-        });
+//        imageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                getActivity().getSupportFragmentManager().popBackStackImmediate();
+//            }
+//        });
     return view;
     }
     public interface OnFragmentInteractionListener{
