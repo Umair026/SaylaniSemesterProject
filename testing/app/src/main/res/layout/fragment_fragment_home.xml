@@ -65,6 +65,8 @@
         android:layout_height="7dp"
         android:background="@drawable/view_drawable"/>
 
+
+
     <RelativeLayout
         android:background="#fff"
         android:layout_below="@id/view_home"

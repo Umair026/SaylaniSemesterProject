@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#33f"
+    android:background="#37474f"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.omii026.testing.Fragments.Sign_In">
@@ -8,39 +8,36 @@
     <ImageView
         android:background="@drawable/userlogo"
         android:layout_width="150dp"
+        android:visibility="gone"
         android:layout_height="150dp"
         android:layout_above="@+id/layout_login"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imageView2" />
 
 
     <RelativeLayout
-        android:padding="30dp"
+        android:paddingLeft="44dp"
+        android:paddingRight="44dp"
+        android:paddingBottom="15dp"
+
         android:visibility="visible"
-        android:background="@android:drawable/dialog_holo_light_frame"
         android:id="@+id/layout_login"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/layout_signup"
-        android:layout_toEndOf="@+id/layout_signup">
-
-        <TextView
-            android:text="Login To your account"
-            android:textColor="#33f"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+        android:layout_height="300dp"
+        android:layout_above="@+id/userset1"
+        android:layout_toRightOf="@+id/imageView2"
+        android:layout_toEndOf="@+id/imageView2">
 
         <EditText
             android:id="@+id/loginEmail"
             android:hint="email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#33f"
-            android:textColor="#33f"
-
+            android:textColorHint="#80cbc4"
+            android:textColor="#80cbc4"
+            android:backgroundTint="#80cbc4"
+            android:gravity="center"
+            android:drawableLeft="@drawable/ic_person_outline_white_24dp"
             android:layout_above="@+id/LoginPassword"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -57,26 +54,32 @@
         <EditText
             android:id="@+id/LoginPassword"
             android:hint="password"
+            android:gravity="center"
             android:inputType="textPassword"
-            android:textColorHint="#33f"
-            android:textColor="#33f"
+            android:textColorHint="#80cbc4"
+            android:textColor="#80cbc4"
+            android:layout_marginBottom="30dp"
+            android:drawableLeft="@android:drawable/ic_lock_idle_lock"
+
+            android:backgroundTint="#80cbc4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_above="@+id/signin"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
             android:text="sign in"
+
             android:id="@+id/signin"
-            android:textColor="#fff"
+            android:background="#009688"
+            android:textColor="#80cbc4"
             android:textSize="12dp"
-            android:background="@drawable/circular_btn"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"/>
+            android:textStyle="bold"
+            android:layout_alignParentBottom="true"/>
+
     </RelativeLayout>
 
     <ImageView
@@ -84,8 +87,19 @@
         android:background="@drawable/userset1"
         android:layout_width="100dp"
         android:layout_height="20dp"
+        android:layout_marginBottom="30dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="61dp" />
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Me"
+        android:textColor="#80cbc4"
+        android:textStyle="bold|italic"
+        android:textSize="35dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layout_login"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

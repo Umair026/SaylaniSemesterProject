@@ -14,7 +14,10 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -90,6 +93,9 @@ public class Home extends Fragment {
         // Inflate the layout for this fragment
         Log.d("onCreateView","Home");
         rootView =  inflater.inflate(R.layout.fragment_fragment_home, container, false);
+
+
+
         btn1 = (ImageButton) rootView.findViewById(R.id.dropbox);
         btn2 = (ImageButton) rootView.findViewById(R.id.facebook);
 
@@ -215,5 +221,7 @@ public class Home extends Fragment {
         void UserFragment();
         void OpenDropox();
     }
+
+
 
 }
