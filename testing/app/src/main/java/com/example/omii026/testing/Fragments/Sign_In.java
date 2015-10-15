@@ -3,11 +3,15 @@ package com.example.omii026.testing.Fragments;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +31,7 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Map;
 
 public class Sign_In extends Fragment {
@@ -74,6 +79,21 @@ public class Sign_In extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_sign__in, container, false);
+
+        mListener = (OnFragmentInteractionListener) getActivity();
+        mListener.changeImage1();
+
+
+        Bitmap bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.one_football_app_icon);//your image
+        Log.d("befoer conversion:", "" + R.drawable.one_football_app_icon);
+        Log.d("convert to bitmap:",""+bmp);
+        ByteArrayOutputStream bYtE = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
+        bmp.recycle();
+        byte[] byteArray = bYtE.toByteArray();
+        String imageFile = Base64.encodeToString(byteArray, Base64.URL_SAFE);
+        Log.d("convert to base64:",""+imageFile);
+
 
         loginEmail = (EditText) view.findViewById(R.id.loginEmail);
         loginPassword = (EditText) view.findViewById(R.id.LoginPassword);
@@ -200,6 +220,7 @@ public class Sign_In extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+        void changeImage1();
     }
 
 }

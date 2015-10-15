@@ -80,6 +80,8 @@ public class Sign_up extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_sign_up, container, false);
+        mListener = (OnFragmentInteractionListener) getActivity();
+        mListener.changImage2();
 
         f_Name = (EditText) view.findViewById(R.id.f_name);
         l_Name = (EditText) view.findViewById(R.id.l_name);
@@ -179,6 +181,8 @@ public class Sign_up extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+
+        void changImage2();
     }
 
 }

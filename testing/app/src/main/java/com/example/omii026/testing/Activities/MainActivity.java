@@ -1,6 +1,7 @@
 package com.example.omii026.testing.Activities;
 
 import android.app.ProgressDialog;
+import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -19,6 +21,8 @@ import android.widget.Toast;
 import com.example.omii026.testing.Class.User;
 import com.example.omii026.testing.Firebase.FireBaseHandler;
 import com.example.omii026.testing.Fragments.Main_PagerAdapter;
+import com.example.omii026.testing.Fragments.Sign_In;
+import com.example.omii026.testing.Fragments.Sign_up;
 import com.example.omii026.testing.MeApp;
 import com.example.omii026.testing.R;
 import com.example.omii026.testing.Services.*;
@@ -31,7 +35,9 @@ import com.firebase.client.FirebaseError;
 import java.util.Map;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity
+        implements Sign_In.OnFragmentInteractionListener,
+        Sign_up.OnFragmentInteractionListener{
 
     String pushKey;
     Firebase pRef;
@@ -43,6 +49,7 @@ public class MainActivity extends ActionBarActivity {
     private String fName,lName,S_Password, l_Email, l_Password, S_Uid, S_Email;
     private User user;
     private ProgressDialog progressDialog1;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +57,9 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         Firebase.setAndroidContext(this);    // context defining
 
+         imageView = (ImageView) findViewById(R.id.userset1);
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+
         Main_PagerAdapter pagerAdapter = new Main_PagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
 
@@ -276,5 +285,20 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void changImage2() {
+        imageView.setImageResource(R.drawable.userset2);
+    }
+
+    @Override
+    public void changeImage1() {
+        imageView.setImageResource(R.drawable.userset1);
     }
 }
