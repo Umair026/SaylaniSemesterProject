@@ -81,6 +81,8 @@ private static DrawerLayout mDrawerLayout;
         menuManagerService = new MenuManagerService();
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
 //        setSupportActionBar(toolbar);
 //
 //        toolbar.setNavigationOnClickListener(new View.OnClickListener() {

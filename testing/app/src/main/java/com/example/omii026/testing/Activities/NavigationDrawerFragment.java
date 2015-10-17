@@ -1,5 +1,7 @@
 package com.example.omii026.testing.Activities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -10,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,6 +75,7 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mUserLearnedDrawer;
     public static View rootView;
     private TextView userName;
+    private ImageView userImage;
 
     public NavigationDrawerFragment() {
     }
@@ -105,27 +110,45 @@ public class NavigationDrawerFragment extends Fragment {
                              Bundle savedInstanceState) {
          rootView =  inflater.inflate(R.layout.fragment_navigation_drawer, container, true);
         userName = (TextView) rootView.findViewById(R.id.drawerUserName);
+        userImage = (ImageView) rootView.findViewById(R.id.user_circular_image);
         mDrawerListView = (ListView) rootView.findViewById(R.id.drawerList);
 
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-             @Override
-             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                 mDrawerLayout.closeDrawer(rootView);
-                 Log.d("in drawer",""+adapterView.getAdapter().getItem(i).toString());
-                 gettingItem(adapterView.getAdapter().getItem(i).toString());
-             }
-              });
-                mDrawerListView.setAdapter(new NavigationAdapter(getActivity()));
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                mDrawerLayout.closeDrawer(rootView);
+                Log.d("in drawer", "" + adapterView.getAdapter().getItem(i).toString());
+                gettingItem(adapterView.getAdapter().getItem(i).toString());
+            }
+        });
 
-//    NavigationAdapter.add(new DrawerItem("Home"));
-//    NavigationAdapter.add(new DrawerItem("Friends"));
-//    NavigationAdapter.add(new DrawerItem("Groups"));
+          mDrawerListView.setAdapter(new NavigationAdapter(getActivity()));
+
+        FireBaseHandler.getInstance().getUserRef().child(MeApp.getAppUser().getUserId()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+            HashMap<String,Object> data = (HashMap<String, Object>) dataSnapshot.getValue();
+                if(!(data.get("profile-image").toString().equals(""))) {
+
+                    String imageString = data.get("profile-image").toString();
+                    byte[] imageEncode = Base64.decode(imageString,Base64.DEFAULT);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(imageEncode,0,imageEncode.length);
+                    userImage.setImageBitmap(bitmap);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
     NavigationAdapter.add(new DrawerItem("Gallery"));
     NavigationAdapter.add(new DrawerItem("Map"));
     NavigationAdapter.add(new DrawerItem("Find_Friends"));
     NavigationAdapter.add(new DrawerItem("Music_Player"));
     NavigationAdapter.add(new DrawerItem("About_us"));
-//        userName.setText(MeApp.getAppUser().getUserId());
 
         return rootView;
     }

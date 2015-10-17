@@ -16,22 +16,23 @@
             android:id="@+id/user_circular_image"
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:layout_marginLeft="10dp"
-           android:layout_above="@+id/drawerUserName"
             android:src="@drawable/default_user"
             app:border_color="#EC1C24"
-            app:border_width="2dp" />
+            app:border_width="2dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:text="UserName"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="50dp"
             android:textSize="16dp"
-            android:textColor="#fff"
+            android:textColor="#000"
+            android:layout_marginTop="5dp"
             android:id="@+id/drawerUserName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_circular_image"
+            android:layout_alignRight="@+id/user_circular_image"
+            android:layout_alignEnd="@+id/user_circular_image" />
         </RelativeLayout>
     <View
         android:id="@+id/view_drawer"
