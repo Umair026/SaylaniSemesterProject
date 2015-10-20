@@ -53,6 +53,9 @@ public class UploadFileToDropbox extends AsyncTask<Void,Void,Boolean> {
             dropboxApi.putFile(path + selectedFile.getName(), fileInputStream,
                     selectedFile.length(), null, null);
 
+            Log.d("absolutePath:",""+selectedFile.getAbsolutePath());
+
+
 
 
             return true;

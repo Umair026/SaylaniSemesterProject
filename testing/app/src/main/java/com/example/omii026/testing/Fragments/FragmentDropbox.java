@@ -17,13 +17,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.os.Handler;
 
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
+import com.dropbox.client2.exception.DropboxException;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
 import com.dropbox.client2.session.TokenPair;
@@ -45,7 +51,7 @@ public class FragmentDropbox extends Fragment  {
     private static final String DROPBOX_NAME = "dropbox.prefs";
     private static final String ACCESS_KEY = "m4za1ruwmqkbzpf";
     private static final String ACCESS_SECRET = "veko8l6iqei3l6u";
-    private static final Session.AccessType ACCESS_TYPE =  Session.AccessType.DROPBOX;
+    private static final Session.AccessType ACCESS_TYPE =  Session.AccessType.AUTO;
 
 
     private String mParam1;
@@ -129,6 +135,38 @@ public class FragmentDropbox extends Fragment  {
 //                listFiles.execute();
             }
         });
+
+        ((Button) view.findViewById(R.id.download)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DownloadFile downloadFile = new DownloadFile(getActivity(),selectedFile,dropbox);
+                downloadFile.execute();
+
+//                FileOutputStream outputStream = null;
+//                File file = new File("/mnt/sdcard/Download/SampleFile.txt");
+//
+//                try {
+//                    outputStream = new FileOutputStream(file);
+//                    DropboxAPI.DropboxFileInfo info = dropbox.getFile("/proguard-android-optimize.txt",null,outputStream,null);
+//
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//                catch (DropboxException e) {
+//                    e.printStackTrace();
+//                }finally {
+//                    if(outputStream != null){
+//                        try{
+//                            outputStream.close();
+//                        }catch (IOException e){
+//
+//                        }
+//                    }
+//                }
+
+            }
+        });
         loggedIn(false);
 
         AppKeyPair appKeyPair = new AppKeyPair(ACCESS_KEY,ACCESS_SECRET);
@@ -140,14 +178,15 @@ public class FragmentDropbox extends Fragment  {
 
         if(key != null && secret != null){
             AccessTokenPair token =  new AccessTokenPair(key,secret);
-            session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE.APP_FOLDER,token);
+            session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE.AUTO,token);
         }else{
-            session = new AndroidAuthSession(appKeyPair,ACCESS_TYPE.APP_FOLDER);
+            session = new AndroidAuthSession(appKeyPair,ACCESS_TYPE.AUTO);
         }
         dropbox =new DropboxAPI(session);
 
         return view;
     }
+
 
     private final Handler handler = new Handler() {
         public void handleMessage(Message msg) {

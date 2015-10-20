@@ -41,7 +41,6 @@
         android:layout_height="5dp"
         android:background="@drawable/view_drawable"/>
 
-
 <ListView
     android:layout_below="@id/view_drawer"
     android:id="@+id/drawerList"
