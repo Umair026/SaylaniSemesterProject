@@ -104,6 +104,20 @@ public class Home extends Fragment {
         textView.setText(Html.fromHtml(link));
         textView.setClickable(true);
 
+//        Bitmap bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.listimage1);//your image
+//        String btmapString = ""+bmp;
+//        ByteArrayOutputStream bYtE = new ByteArrayOutputStream();
+//        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
+//        bmp.recycle();
+//        byte[] byteArray = bYtE.toByteArray();
+//        String imageFile = Base64.encodeToString(byteArray, Base64.DEFAULT);
+//        Log.d("base64",""+imageFile);
+//               try {
+//                   FireBaseHandler.getInstance().getUserRef().child(MeApp.getAppUser().getUserId()).child("profile-image").setValue(imageFile);
+//
+//               }catch (Exception e){
+//                   e.printStackTrace();
+//                            }
 
         btn1 = (ImageButton) rootView.findViewById(R.id.dropbox);
         btn2 = (ImageButton) rootView.findViewById(R.id.facebook);

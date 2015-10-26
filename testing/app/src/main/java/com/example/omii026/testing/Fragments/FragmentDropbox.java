@@ -19,14 +19,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 
 import android.os.Handler;
@@ -122,7 +120,7 @@ public class FragmentDropbox extends Fragment  {
                     dropbox.getSession().unlink();
                     loggedIn(false);
                 }else{
-                    ((AndroidAuthSession)dropbox.getSession()).startAuthentication(getActivity().getApplicationContext());
+                    ((AndroidAuthSession) dropbox.getSession()).startAuthentication(getActivity().getApplicationContext());
                 }
             }
         });
@@ -149,6 +147,7 @@ public class FragmentDropbox extends Fragment  {
 //                listFiles.execute();
             }
         });
+
         ((Button) view.findViewById(R.id.download)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,35 +176,24 @@ public class FragmentDropbox extends Fragment  {
 
         if(key != null && secret != null){
             AccessTokenPair token =  new AccessTokenPair(key,secret);
+            Log.d("Testing:","in If->"+token);
+
             session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE.AUTO,token);
+            Log.d("if/Testing:",""+session);
+
         }else{
             session = new AndroidAuthSession(appKeyPair,ACCESS_TYPE.AUTO);
+            Log.d("else/Testing:",""+session);
+
         }
-        dropbox =new DropboxAPI<AndroidAuthSession>(session);
+        dropbox =new DropboxAPI(session);
+
+        Log.d("outside/Testing:",""+session);
+        Log.d("Testing:",""+dropbox);
+
+
 
         return view;
-    }
-
-    String getShareURL(String strURL) {
-        URLConnection conn = null;
-        String redirectedUrl = null;
-        try {
-            URL inputURL = new URL(strURL);
-            conn = inputURL.openConnection();
-            conn.connect();
-
-            InputStream is = conn.getInputStream();
-//            System.out.println("Redirected URL: " + conn.getURL());
-            redirectedUrl = conn.getURL().toString();
-            is.close();
-
-        } catch (MalformedURLException e) {
-            Log.d("", "Please input a valid URL");
-        } catch (IOException ioe) {
-            Log.d("", "Can not connect to the URL");
-        }
-
-        return redirectedUrl;
     }
 
 
