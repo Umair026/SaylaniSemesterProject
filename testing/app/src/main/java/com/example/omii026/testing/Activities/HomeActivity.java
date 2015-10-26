@@ -32,6 +32,7 @@ import com.example.omii026.testing.Firebase.FireBaseHandler;
 import com.example.omii026.testing.Fragments.ChatFragment;
 import com.example.omii026.testing.Fragments.FindFriends;
 import com.example.omii026.testing.Fragments.FragmentDropbox;
+import com.example.omii026.testing.Fragments.FragmentMap;
 import com.example.omii026.testing.Fragments.Friends;
 import com.example.omii026.testing.Fragments.Gallery;
 import com.example.omii026.testing.Fragments.GroupChatFragment;
@@ -149,7 +150,10 @@ private static DrawerLayout mDrawerLayout;
     @Override
     public void onMapClick(String Item) {
 //TODO
-
+        FragmentManager mFragmentManager = getSupportFragmentManager();
+        mFragmentManager.beginTransaction()
+                .add(R.id.container, new FragmentMap())
+                .addToBackStack(null).commit();
 
     }
 

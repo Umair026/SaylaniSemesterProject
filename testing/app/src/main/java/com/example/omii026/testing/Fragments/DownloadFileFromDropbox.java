@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.exception.DropboxException;
+import com.example.omii026.testing.Firebase.FireBaseHandler;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -20,6 +21,7 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
 
 /**
  * Created by Omii026 on 10/18/2015.
@@ -52,6 +54,14 @@ public class DownloadFileFromDropbox extends AsyncTask<Void,Void,Boolean> {
                    Log.d(TAG,"Link.url:"+Link.url);
                     address = getShareURL(Link.url).replaceFirst("https://www", "https://dl");
                     Log.d(TAG,"shareLink:"+address);
+            if(!address.equals("")){
+                FragmentDropbox.shareLink = address;
+//                HashMap<String,Object> obj = new HashMap<>();
+//                obj.put("link",address);
+//                FireBaseHandler.getInstance().getRootFirebaseRef().child("Links").child("shareLink").setValue(obj);
+
+//                String link = "<a href='www.facebook.com'>facebook<> "
+            }
 
             return true;
         } catch(DropboxException e){

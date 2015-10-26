@@ -14,22 +14,25 @@
         android:background="@drawable/view_drawable"/>
 
     <!-- TODO: Update blank fragment layout -->
-    <Button
-        android:background="@android:color/transparent"
-        android:id="@+id/create_group"
-        android:layout_below="@id/view_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="create"
-        android:textSize="18dp"
-        android:textColor="@android:color/holo_blue_dark"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:textStyle="bold|italic"/>
+
 
     <ListView
         android:id="@+id/group_list"
-        android:layout_below="@id/create_group"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+<RelativeLayout
+    android:background="#33f"
+    android:layout_alignParentBottom="true"
+    android:layout_width="match_parent"
+    android:layout_height="35dp">
+
+    <ImageView
+        android:id="@+id/create_group"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
+      android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:src="@android:drawable/ic_input_add"/>
+
 </RelativeLayout>
+    </RelativeLayout>

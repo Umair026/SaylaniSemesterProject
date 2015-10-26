@@ -65,7 +65,7 @@ public class GroupListAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.group_item,parent,false);
         }
         ((TextView) convertView.findViewById(R.id.groupName)).setText(getItem(position).getGroupName());
-        ((TextView) convertView.findViewById(R.id.groupDesc)).setText(getItem(position).getGroupDesc());
+//        ((TextView) convertView.findViewById(R.id.groupDesc)).setText(getItem(position).getGroupDesc());
         ((TextView) convertView.findViewById(R.id.groupOwner)).setText("owner:"+getItem(position).getGroupOwner());
 
           final ImageView popup = (ImageView) convertView.findViewById(R.id.selector);

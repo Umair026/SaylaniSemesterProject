@@ -84,15 +84,15 @@ public class Sign_In extends Fragment {
         mListener.changeImage1();
 
 
-        Bitmap bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.one_football_app_icon);//your image
-        Log.d("befoer conversion:", "" + R.drawable.one_football_app_icon);
-        Log.d("convert to bitmap:",""+bmp);
-        ByteArrayOutputStream bYtE = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
-        bmp.recycle();
-        byte[] byteArray = bYtE.toByteArray();
-        String imageFile = Base64.encodeToString(byteArray, Base64.URL_SAFE);
-        Log.d("convert to base64:",""+imageFile);
+//        Bitmap bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.one_football_app_icon);//your image
+//        Log.d("befoer conversion:", "" + R.drawable.one_football_app_icon);
+//        Log.d("convert to bitmap:",""+bmp);
+//        ByteArrayOutputStream bYtE = new ByteArrayOutputStream();
+//        bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
+//        bmp.recycle();
+//        byte[] byteArray = bYtE.toByteArray();
+//        String imageFile = Base64.encodeToString(byteArray, Base64.URL_SAFE);
+//        Log.d("convert to base64:",""+imageFile);
 
 
         loginEmail = (EditText) view.findViewById(R.id.loginEmail);

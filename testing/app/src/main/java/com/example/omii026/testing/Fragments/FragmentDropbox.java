@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.os.Message;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +57,7 @@ public class FragmentDropbox extends Fragment  {
     private static final String ACCESS_SECRET = "45zdnuzp9r2ira8";
     private static final Session.AccessType ACCESS_TYPE =  Session.AccessType.AUTO;
 
+    public static String shareLink = "href";
 
     private String mParam1;
     private String mParam2;
@@ -72,6 +75,7 @@ public class FragmentDropbox extends Fragment  {
     public static File file;
     public static FileOutputStream outputStream;
     public static DropboxAPI.DropboxFileInfo info;
+    public static TextView LinktextView;
 
     // TODO: Rename and change types and number of parameters
     public static FragmentDropbox newInstance(String param1, String param2) {
@@ -104,6 +108,10 @@ public class FragmentDropbox extends Fragment  {
 //        contain = (LinearLayout) view.findViewById(R.id.container_files);
         uploadFileBtn = (Button) view.findViewById(R.id.upload);
         loginBtn = (Button) view.findViewById(R.id.login);
+        LinktextView = (TextView) view.findViewById(R.id.link);
+
+
+
 //        listFilesBtn = (Button) view.findViewById(R.id.listFile);
 
 
@@ -145,10 +153,18 @@ public class FragmentDropbox extends Fragment  {
             @Override
             public void onClick(View v) {
 
+                if(!shareLink.equals("")){
+//                    String link = "<a href='"+shareLink+"'>"+shareLink+"</a>";
+                    LinktextView.setClickable(true);
+                    LinktextView.setMovementMethod(LinkMovementMethod.getInstance());
+                    LinktextView.setText(shareLink);
+                }
+
 //                DownloadFileFromDropbox downloadFileFromDropbox = new DownloadFileFromDropbox(getActivity(),dropbox,FILE_DIR,selectedFile);
 //                downloadFileFromDropbox.execute();
             }
         });
+
 
         loggedIn(false);
 

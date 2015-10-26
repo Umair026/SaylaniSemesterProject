@@ -64,6 +64,15 @@
         android:id="@+id/download"
         android:layout_above="@+id/login"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="link"
+        android:id="@+id/link"
+        android:autoLink="web"
+        android:layout_below="@+id/dropboxImage"
+        android:layout_centerHorizontal="true" />
     <!--<ScrollView-->
         <!--android:layout_width="fill_parent"-->
         <!--android:layout_height="match_parent"-->

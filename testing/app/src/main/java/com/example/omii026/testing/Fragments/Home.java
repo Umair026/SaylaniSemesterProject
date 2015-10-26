@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,6 +31,7 @@ import com.example.omii026.testing.Activities.NavigationDrawerFragment;
 import com.example.omii026.testing.Firebase.FireBaseHandler;
 import com.example.omii026.testing.MeApp;
 import com.example.omii026.testing.R;
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
@@ -61,6 +64,7 @@ public class Home extends Fragment {
     TextView tv1,tv2;
     private onFragmentInteractionListener mListener;
     private Animation menuAnimation;
+    private TextView textView;
 
 
     // TODO: Rename and change types and number of parameters
@@ -91,9 +95,14 @@ public class Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Log.d("onCreateView","Home");
-        rootView =  inflater.inflate(R.layout.fragment_fragment_home, container, false);
+        Log.d("onCreateView", "Home");
+        rootView = inflater.inflate(R.layout.fragment_fragment_home, container, false);
 
+        textView = (TextView) rootView.findViewById(R.id.section_label);
+        String link = "<a href='"+ "http://www.facebook.com" +"'>facebook</a>";
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+        textView.setText(Html.fromHtml(link));
+        textView.setClickable(true);
 
 
         btn1 = (ImageButton) rootView.findViewById(R.id.dropbox);

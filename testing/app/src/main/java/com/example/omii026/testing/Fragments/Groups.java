@@ -57,7 +57,7 @@ public class Groups extends Fragment {
     private OnFragmentInteractionListener mListener;
     private ListView listView;
     private ArrayList<GroupChatData> list = new ArrayList<>();
-    private Button create;
+    private ImageView create;
     private EditText groupIdEditText,groupDescEditText;
     private String desc,id;
     private ProgressDialog progressDialog;
@@ -91,7 +91,7 @@ public class Groups extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_groups, container, false);
-        create = (Button) view.findViewById(R.id.create_group);
+        create = (ImageView) view.findViewById(R.id.create_group);
         listView = (ListView) view.findViewById(R.id.group_list);
 
                Log.d("onCreateView:","Group");
@@ -182,15 +182,15 @@ public class Groups extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Bitmap bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.one_football_app_icon);//your image
-                Log.d("befoer conversion:",""+R.drawable.one_football_app_icon);
-                Log.d("convert to bitmap:",""+bmp);
-                ByteArrayOutputStream bYtE = new ByteArrayOutputStream();
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
-                bmp.recycle();
-                byte[] byteArray = bYtE.toByteArray();
-                String imageFile = Base64.encodeToString(byteArray, Base64.URL_SAFE);
-                Log.d("convert to base64:",""+imageFile);
+//                Bitmap bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.one_football_app_icon);//your image
+//                Log.d("befoer conversion:",""+R.drawable.one_football_app_icon);
+//                Log.d("convert to bitmap:",""+bmp);
+//                ByteArrayOutputStream bYtE = new ByteArrayOutputStream();
+//                bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
+//                bmp.recycle();
+//                byte[] byteArray = bYtE.toByteArray();
+//                String imageFile = Base64.encodeToString(byteArray, Base64.URL_SAFE);
+//                Log.d("convert to base64:",""+imageFile);
 
 //                FireBaseHandler.getInstance().getUserRef()
 //                        .child(MeApp.getAppUser().getUserId()).child("profile-image").setValue(imageFile);
