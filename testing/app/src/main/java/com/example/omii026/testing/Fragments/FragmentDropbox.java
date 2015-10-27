@@ -108,7 +108,7 @@ public class FragmentDropbox extends Fragment  {
                     dropbox.getSession().unlink();
                     loggedIn(false);
                 }else{
-                    ((AndroidAuthSession)dropbox.getSession()).startAuthentication(getActivity().getApplicationContext());
+                    ((AndroidAuthSession) dropbox.getSession()).startAuthentication(getActivity().getApplicationContext());
                 }
             }
         });
@@ -178,11 +178,22 @@ public class FragmentDropbox extends Fragment  {
 
         if(key != null && secret != null){
             AccessTokenPair token =  new AccessTokenPair(key,secret);
+            Log.d("Testing:","in If->"+token);
+
             session = new AndroidAuthSession(appKeyPair, ACCESS_TYPE.AUTO,token);
+            Log.d("if/Testing:",""+session);
+
         }else{
             session = new AndroidAuthSession(appKeyPair,ACCESS_TYPE.AUTO);
+            Log.d("else/Testing:",""+session);
+
         }
         dropbox =new DropboxAPI(session);
+
+        Log.d("outside/Testing:",""+session);
+        Log.d("Testing:",""+dropbox);
+
+
 
         return view;
     }

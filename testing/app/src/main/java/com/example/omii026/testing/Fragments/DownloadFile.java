@@ -56,7 +56,7 @@ public class DownloadFile extends AsyncTask<Void,Void,Boolean> {
                 }
             }
         }
-        return false;
+        return true;
     }
 
     @Override
