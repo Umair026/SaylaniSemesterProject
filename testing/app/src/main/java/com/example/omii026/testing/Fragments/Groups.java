@@ -3,9 +3,12 @@ package com.example.omii026.testing.Fragments;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +37,7 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -177,6 +181,20 @@ public class Groups extends Fragment {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Bitmap bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.one_football_app_icon);//your image
+                Log.d("befoer conversion:",""+R.drawable.one_football_app_icon);
+                Log.d("convert to bitmap:",""+bmp);
+                ByteArrayOutputStream bYtE = new ByteArrayOutputStream();
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
+                bmp.recycle();
+                byte[] byteArray = bYtE.toByteArray();
+                String imageFile = Base64.encodeToString(byteArray, Base64.URL_SAFE);
+                Log.d("convert to base64:",""+imageFile);
+
+//                FireBaseHandler.getInstance().getUserRef()
+//                        .child(MeApp.getAppUser().getUserId()).child("profile-image").setValue(imageFile);
+
 
                 ShowDialog();
             }

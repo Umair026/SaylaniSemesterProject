@@ -1,32 +1,23 @@
+<!--android:background="#37474f"-->
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#37474f"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.omii026.testing.Fragments.Sign_In">
 
-    <ImageView
-        android:background="@drawable/userlogo"
-        android:layout_width="150dp"
-        android:visibility="gone"
-        android:layout_height="150dp"
-        android:layout_above="@+id/layout_login"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/imageView2" />
 
 
     <RelativeLayout
         android:paddingLeft="44dp"
         android:paddingRight="44dp"
         android:paddingBottom="15dp"
-
         android:visibility="visible"
         android:id="@+id/layout_login"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_above="@+id/userset1"
-        android:layout_toRightOf="@+id/imageView2"
-        android:layout_toEndOf="@+id/imageView2">
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true">
 
         <EditText
             android:id="@+id/loginEmail"
@@ -86,12 +77,14 @@
         android:id="@+id/userset1"
         android:background="@drawable/userset1"
         android:layout_width="100dp"
+        android:visibility="gone"
         android:layout_height="20dp"
         android:layout_marginBottom="30dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <TextView
+        android:id="@+id/logoText"
         android:text="Me"
         android:textColor="#80cbc4"
         android:textStyle="bold|italic"
@@ -101,5 +94,18 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/layout_login"
         android:layout_centerHorizontal="true" />
+    <ImageView
+        android:id="@+id/logoImage"
+        android:background="@drawable/one_football_app_icon"
+        android:textColor="#80cbc4"
+        android:textStyle="bold|italic"
+        android:textSize="35dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_above="@+id/logoText"
+        android:layout_centerHorizontal="true" />
+
+
 
 </RelativeLayout>

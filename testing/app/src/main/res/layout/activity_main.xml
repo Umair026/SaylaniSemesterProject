@@ -9,8 +9,20 @@
     <android.support.v4.view.ViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pager"
+        android:background="#37474f"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+
+        />
+    <ImageView
+        android:id="@+id/userset1"
+        android:background="@drawable/userset1"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
 
     <!--<RelativeLayout-->
         <!--android:padding="20dp"-->

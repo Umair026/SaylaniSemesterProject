@@ -60,7 +60,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Download"
+        android:text="download"
         android:id="@+id/download"
         android:layout_above="@+id/login"
         android:layout_centerHorizontal="true" />
