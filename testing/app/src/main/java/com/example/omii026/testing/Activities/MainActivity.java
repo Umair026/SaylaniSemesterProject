@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 
 import com.example.omii026.testing.Class.User;
@@ -42,10 +43,35 @@ public class MainActivity extends ActionBarActivity {
         Firebase.setAndroidContext(this);    // context defining
 
 
-
+        final ImageView imageView = (ImageView) findViewById(R.id.userset1);
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         Main_PagerAdapter pagerAdapter = new Main_PagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
+
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if(position == 0){
+                    imageView.setImageResource(R.drawable.userset1);
+                }
+                else if(position == 1){
+                    imageView.setImageResource(R.drawable.userset2);
+
+                }
+
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
 
 
@@ -246,6 +272,10 @@ public class MainActivity extends ActionBarActivity {
 //
 //            }
 //        });
+
+    }
+
+    private void DotImage(int position) {
 
     }
 

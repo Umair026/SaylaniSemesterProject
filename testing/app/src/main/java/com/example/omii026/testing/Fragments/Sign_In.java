@@ -80,8 +80,8 @@ public class Sign_In extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_sign__in, container, false);
 
-        mListener = (OnFragmentInteractionListener) getActivity();
-        mListener.changeImage1();
+//        mListener = (OnFragmentInteractionListener) getActivity();
+//        mListener.changeImage1();
 
 
 //        Bitmap bmp =  BitmapFactory.decodeResource(getResources(), R.drawable.one_football_app_icon);//your image
