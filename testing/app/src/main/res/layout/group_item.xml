@@ -1,61 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+
     <RelativeLayout
-        android:background="@android:drawable/dialog_holo_light_frame"
+        android:id="@+id/layout1"
+        android:layout_marginTop="5dp"
+        android:background="#fff"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_margin="10dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/one_football_app_icon"
+            android:background="@drawable/image2"
             android:id="@+id/group_image1"
             android:layout_width="100dp"
-            android:layout_height="80dp"/>
+            android:layout_height="80dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:text="Group Name"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:id="@+id/groupName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/group_image1"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:text="Group Desc"
+                android:textSize="14dp"
+                android:id="@+id/groupDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignLeft="@+id/groupName"
+                android:layout_alignStart="@+id/groupName" />
+
+
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/user_circular_image"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/default_user"
+                    app:border_color="#EC1C24"
+                    app:border_width="2dp"
+                    android:layout_above="@+id/groupOwner"
+                    android:layout_alignLeft="@+id/groupDesc"
+                    android:layout_alignStart="@+id/groupDesc" />
+
+                <TextView
+                    android:text="Group Owner"
+                    android:textSize="12dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/groupOwner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     />
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
         <ImageView
             android:id="@+id/selector"
             android:src="@drawable/ic_more_vert_black"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"/>
-        <TextView
-            android:text="Group Owner"
-            android:textSize="12dp"
-            android:textColor="#22f"
-            android:id="@+id/groupOwner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/group_image1"
-            android:layout_alignParentRight="true"/>
-
-
-
-        <TextView
-            android:text="Group Name"
-            android:textSize="18dp"
-            android:id="@+id/groupName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/group_image1"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <!--<TextView-->
-            <!--android:text="Group Desc"-->
-            <!--android:textSize="18dp"-->
-            <!--android:id="@+id/groupDesc"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignTop="@+id/groupOwner"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_alignParentStart="true" />-->
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentRight="true" />
 
 
     </RelativeLayout>

@@ -6,10 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
-        android:background="@drawable/images"
+        android:background="#c80d0c06"
         android:id="@+id/drawerHader"
         android:layout_width="match_parent"
-        android:layout_height="160dp">
+        android:layout_height="180dp">
 
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -22,11 +22,18 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
+        <ImageView
+            android:layout_margin="15dp"
+            android:id="@+id/editProfile"
+            android:src="@android:drawable/ic_menu_edit"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
         <TextView
             android:text="UserName"
             android:textSize="16dp"
-            android:textColor="#000"
-            android:layout_marginTop="5dp"
+            android:textColor="#fff"
+            android:layout_marginTop="10dp"
             android:id="@+id/drawerUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,9 +54,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:choiceMode="singleChoice"
-    android:divider="@android:color/transparent"
-    android:dividerHeight="0dp"
-    android:background="#fff"
+    android:divider="#59090705"
+    android:dividerHeight="1dp"
+    android:background="#C80D0C06"
     tools:context="com.example.omii026.testing.Activities.NavigationDrawerFragment"/>
 
 </RelativeLayout>
