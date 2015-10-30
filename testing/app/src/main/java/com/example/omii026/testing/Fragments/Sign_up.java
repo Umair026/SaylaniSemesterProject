@@ -80,7 +80,6 @@ public class Sign_up extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_sign_up, container, false);
-
 //        mListener = (OnFragmentInteractionListener) getActivity();
 //        mListener.changImage2();
 

@@ -16,10 +16,10 @@
         />
     <ImageView
         android:id="@+id/userset1"
-        android:background="@drawable/userset1"
+        android:src="@drawable/userset1"
         android:layout_width="100dp"
         android:layout_height="20dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
