@@ -55,9 +55,11 @@ public class GroupChatAdapter extends BaseAdapter {
         if(view == null){
             view = inflater.inflate(R.layout.group_chat_item,viewGroup,false);
         }
+
         ((TextView) view.findViewById(R.id.groupChatText)).setText(getItem(i).getMsg());
         ((TextView) view.findViewById(R.id.senderName)).setText("owner:"+getItem(i).getSenderId());
         ((TextView) view.findViewById(R.id.groupChatTime)).setText(getItem(i).getTimestamp()+"");
+
         return view;
     }
 }

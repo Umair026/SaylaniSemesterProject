@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -55,7 +56,7 @@ public class ChatFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private View view;
     private ImageView chat_sent;
-    private TextView chat_text;
+    private EditText chat_text;
     private ListView listView;
     private UserChatAdapter userChatAdapter;
     private ArrayList<ChatData> textMessage = new ArrayList<>();
@@ -94,7 +95,7 @@ public class ChatFragment extends Fragment {
 //        ((TextView)view.findViewById(R.id.title_chat)).setText(mParam2);
 
         chat_sent = (ImageView) view.findViewById(R.id.chat_sent);
-        chat_text = (TextView) view.findViewById(R.id.chat_Text);
+        chat_text = (EditText) view.findViewById(R.id.chat_Text);
         listView = (ListView) view.findViewById(R.id.ChatList);
 
         //method 3
@@ -263,17 +264,20 @@ public class ChatFragment extends Fragment {
         listView.setAdapter(userChatAdapter);
         userChatAdapter.notifyDataSetChanged();
 
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-               ChatData a =textMessage.remove(i);
-                userChatAdapter.notifyDataSetChanged();
-                FireBaseHandler.getInstance().getConversationRef()
-                        .child(newRef.getKey()).child(a.getKey()).removeValue();
 
-                return false;
-            }
-        });
+
+
+//        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+//               ChatData a =textMessage.remove(i);
+//                userChatAdapter.notifyDataSetChanged();
+//                FireBaseHandler.getInstance().getConversationRef()
+//                        .child(newRef.getKey()).child(a.getKey()).removeValue();
+//
+//                return false;
+//            }
+//        });
 
 
         return view;
