@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.omii026.testing.Firebase.FireBaseHandler;
 import com.example.omii026.testing.R;
@@ -49,6 +51,7 @@ public class FindFriends extends Fragment {
     private ArrayList<UserData> dataList = new ArrayList<>();
     private ListView listView;
     private ImageView imageView;
+    private SearchView searchView;
     private FindFriendListAdapter findFriendListAdapter;
 
     // TODO: Rename and change types and number of parameters
@@ -78,7 +81,7 @@ public class FindFriends extends Fragment {
         // Inflate the layout for this fragment
           view =  inflater.inflate(R.layout.fragment_find_friends, container, false);
          listView = (ListView) view.findViewById(R.id.Umair);
-
+        searchView = (SearchView) view.findViewById(R.id.searchFriends);
 
         FireBaseHandler.getInstance().getUserRef().addChildEventListener(new ChildEventListener() {
             @Override
@@ -87,7 +90,8 @@ public class FindFriends extends Fragment {
                 Map<String,Object> userData = (Map<String, Object>) dataSnapshot.getValue();
                 String userId = userData.get("profile-image").toString();
                 UserData data = new UserData(key,userId);
-                dataList.add(data);
+//                dataList.add(data);
+               findFriendListAdapter.add(data);
                 findFriendListAdapter.notifyDataSetChanged();
             }
 
@@ -111,10 +115,26 @@ public class FindFriends extends Fragment {
 
             }
         });
- findFriendListAdapter =new FindFriendListAdapter(getActivity().getApplicationContext(),dataList);
+ findFriendListAdapter =new FindFriendListAdapter(getActivity().getApplicationContext(),new ArrayList<UserData>());
         listView.setAdapter(findFriendListAdapter);
         findFriendListAdapter.notifyDataSetChanged();
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                Toast.makeText(getActivity(),"change",Toast.LENGTH_SHORT).show();
+
+                findFriendListAdapter.filterFriends(newText.toString().toLowerCase());
+
+                return false;
+            }
+        });
 
 
     return view;

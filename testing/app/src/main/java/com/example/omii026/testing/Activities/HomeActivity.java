@@ -134,6 +134,17 @@ private static DrawerLayout mDrawerLayout;
     }
 
     @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        if(getSupportFragmentManager().getBackStackEntryCount() == 0){
+            moveTaskToBack(true);
+        }
+        else{
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     public void onHomeClick(String Item) {
 //        if(mFragmentManager == null) {
 //            mFragmentManager = getSupportFragmentManager();

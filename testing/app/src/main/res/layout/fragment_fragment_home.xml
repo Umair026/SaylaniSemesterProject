@@ -62,6 +62,7 @@
             android:layout_margin="6dp"
             android:layout_alignParentRight="true"
             android:background="@drawable/circular_fab"
+
             android:layout_above="@+id/btnFab"
             android:layout_centerHorizontal="true"
             android:visibility="gone"/>

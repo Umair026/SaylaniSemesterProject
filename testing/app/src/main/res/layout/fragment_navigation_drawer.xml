@@ -1,6 +1,8 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
+    android:clickable="false"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -14,8 +16,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/user_circular_image"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
             android:src="@drawable/default_user"
             app:border_color="#EC1C24"
             app:border_width="2dp"

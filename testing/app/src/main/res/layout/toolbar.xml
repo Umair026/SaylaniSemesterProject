@@ -6,7 +6,7 @@
         android:id="@+id/toolbar"
         android:statusBarColor="#33f"
         android:gravity="center"
-        android:background="#456DFF"
+        android:background="#37474f"
         android:minHeight="?attr/actionBarSize"
         app:theme="@style/Base.Theme.AppCompat">
 <RelativeLayout

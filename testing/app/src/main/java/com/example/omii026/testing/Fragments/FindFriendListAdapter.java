@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -15,15 +16,20 @@ import java.util.ArrayList;
 /**
  * Created by Omii026 on 9/2/2015.
  */
-public class FindFriendListAdapter extends BaseAdapter {
+public class FindFriendListAdapter extends ArrayAdapter<UserData> {
     private static ArrayList<UserData> list2 = new ArrayList<>();
-    private  ArrayList<UserData> dataList = new ArrayList<>();
+    private  ArrayList<UserData> dataList;
+    private  ArrayList<UserData> dataListBackUp;
     private LayoutInflater inflater;
     private Context context;
+    private int mCurrentFilterLength;
 
     public FindFriendListAdapter (Context context,ArrayList<UserData> dataList){
+        super(context,R.layout.user_list_item,dataList);
+
         this.context = context;
         this.dataList = dataList;
+        this.dataListBackUp = new ArrayList<>();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
@@ -35,7 +41,7 @@ public class FindFriendListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
+    public UserData getItem(int i) {
         return dataList.get(i);
     }
 
@@ -55,8 +61,35 @@ public class FindFriendListAdapter extends BaseAdapter {
         return view;
     }
 
-    public static void add(UserData s){
-        list2.add(s);
+    public void add(UserData s){
+        super.add(s);
+        dataListBackUp.add(s);
+    }
+
+    public void filterFriends(String s){
+
+        int filterLength = s.length();
+
+        if(filterLength == 0 || filterLength < mCurrentFilterLength) {
+            mCurrentFilterLength = filterLength;
+            dataList.clear();
+            dataList.addAll(dataListBackUp);
+            if (filterLength == 0) {
+                notifyDataSetChanged();
+                return;
+            }
+        }
+
+            int i=0;
+            while (i < dataList.size()){
+                if(!dataList.get(i).getUserId().toLowerCase().contains(s)){
+                    dataList.remove(i);
+                }else{
+                    i++;
+                }
+            }
+            mCurrentFilterLength = filterLength;
+            notifyDataSetChanged();
     }
 
 

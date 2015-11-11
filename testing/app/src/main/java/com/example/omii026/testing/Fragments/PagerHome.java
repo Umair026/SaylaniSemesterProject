@@ -75,6 +75,7 @@ public class PagerHome extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setText("HOME"));
         tabLayout.addTab(tabLayout.newTab().setText("GROUPS"));
         tabLayout.addTab(tabLayout.newTab().setText("FRIENDS"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         viewPager = (ViewPager) rootView.findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter(getActivity().getSupportFragmentManager(), 3);

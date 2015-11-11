@@ -2,12 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.omii026.testing.Fragments.PagerHome">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:background="#009688"
+        app:tabIndicatorHeight="?attr/actionBarSize"
+        app:tabIndicatorColor="#80cbc4"
         android:minHeight="?attr/actionBarSize"
         />
 
