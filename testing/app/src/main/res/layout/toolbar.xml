@@ -9,7 +9,9 @@
         android:background="#456DFF"
         android:minHeight="?attr/actionBarSize"
         app:theme="@style/Base.Theme.AppCompat">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -21,10 +23,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/title_appbar"
-            android:text="ME"
+            android:layout_centerInParent="true"
             android:textAlignment="center"
             android:textColor="#fff"
+            android:text=""
             android:textSize="20sp"
             android:textStyle="bold" />
+</RelativeLayout>
 </android.support.v7.widget.Toolbar>
 

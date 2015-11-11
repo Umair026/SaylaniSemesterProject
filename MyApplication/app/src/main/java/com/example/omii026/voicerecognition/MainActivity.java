@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         setContentView(R.layout.activity_main);
 
         textToSpeech = new TextToSpeech(MainActivity.this, (TextToSpeech.OnInitListener) MainActivity.this);
+
         mlvTextMatches = (ListView) findViewById(R.id.lvTextMatches);
         msTextMatches = (Spinner) findViewById(R.id.sNoOfMatches);
         mbtSpeak = (Button) findViewById(R.id.btSpeak);

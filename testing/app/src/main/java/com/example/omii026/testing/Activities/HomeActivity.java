@@ -61,6 +61,8 @@ public class HomeActivity extends ActionBarActivity implements
         Friends.OnFragmentInteractionListener,
         GroupListAdapter.AdapterInteface{
 
+    //moveTaskToBack(True);
+
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -70,8 +72,10 @@ public class HomeActivity extends ActionBarActivity implements
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+    private TextView appTitle;
 private static DrawerLayout mDrawerLayout;
     public Toolbar toolbar;
+    TextView toolbarTitle;
     private MenuManagerService menuManagerService = null;
     private User user;
 //    private FragmentManager mFragmentManager = getSupportFragmentManager();
@@ -82,9 +86,16 @@ private static DrawerLayout mDrawerLayout;
         menuManagerService = new MenuManagerService();
         setContentView(R.layout.activity_home);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-
-//        setSupportActionBar(toolbar);
+            }
+        });
+       mTitle = "ME APP";
+        toolbarTitle = (TextView) toolbar.findViewById(R.id.title_appbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("");
 //
 //        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -102,8 +113,11 @@ private static DrawerLayout mDrawerLayout;
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+                (DrawerLayout) findViewById(R.id.drawer_layout),toolbar);
     }
+
+
+
     public void openDrawer(){
         mDrawerLayout.openDrawer(mDrawerLayout);
     }
@@ -206,7 +220,8 @@ private static DrawerLayout mDrawerLayout;
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
+//        actionBar.setTitle(mTitle);
+        toolbarTitle.setText(mTitle);
     }
 
 
