@@ -28,6 +28,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.omii026.testing.Class.User;
 import com.example.omii026.testing.Firebase.FireBaseHandler;
 import com.example.omii026.testing.Fragments.ChatFragment;
 import com.example.omii026.testing.MeApp;
@@ -135,6 +136,7 @@ public class NavigationDrawerFragment extends Fragment {
                     String imageString = data.get("profile-image").toString();
                     byte[] imageEncode = Base64.decode(imageString,Base64.DEFAULT);
                     Bitmap bitmap = BitmapFactory.decodeByteArray(imageEncode,0,imageEncode.length);
+                    User.setProfileImage(bitmap);
                     userImage.setImageBitmap(bitmap);
                 }
 

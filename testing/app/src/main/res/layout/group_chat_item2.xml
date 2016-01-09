@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent">
+    android:layout_height="match_parent"
+    android:layout_width="wrap_content">
 
     <RelativeLayout
         android:id="@+id/group_chat_list"
@@ -15,14 +15,12 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_alignParentRight="true"
             android:id="@+id/groupChatImage"
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/userImage"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/default_user"
@@ -44,16 +42,17 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:layout_toLeftOf="@id/groupChatImage"
-            android:layout_marginRight="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+          android:layout_toRightOf="@id/groupChatImage"
+          android:layout_marginRight="5dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content">
+
       <TextView
         android:layout_marginRight="5dp"
         android:id="@+id/groupChatText"
         android:padding="8dp"
           android:textColor="#000"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:gravity="center_vertical"
         android:text="how r u?"
         android:textSize="18dp"
@@ -64,7 +63,7 @@
             android:layout_marginRight="5dp"
             android:id="@+id/groupChatTime"
             android:layout_below="@id/groupChatText"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
             android:text="7:10 PM"
             android:textSize="12dp"
             android:layout_width="wrap_content"

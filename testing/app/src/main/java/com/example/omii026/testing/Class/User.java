@@ -1,5 +1,11 @@
 package com.example.omii026.testing.Class;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
+import com.example.omii026.testing.MeApp;
+
 /**
  * Created by Omii026 on 9/3/2015.
  */
@@ -9,15 +15,26 @@ public class User {
     private String userId;
     private String l_name;
     private String email;
-    private String profileImage;
+    private Bitmap profileImage;
     private String password;
     private String key;
     private boolean online_status;
 
-    public User(String f_name, String l_name,String userId, String email, String password){
+    public User(String f_name, String l_name,String userId, String email, String image){
         this.f_name = f_name;
         this.l_name = l_name;
         this.userId = userId;
+        this.email = email;
+        byte[] imageEncode = Base64.decode(image,Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(imageEncode,0,imageEncode.length);
+
+        this.profileImage = bitmap;
+    }
+    public User(String f_name, String l_name, String email, Bitmap image, String password){
+        this.f_name = f_name;
+        this.l_name = l_name;
+        this.userId = userId;
+        this.profileImage = image;
         this.email = email;
 //        this.profileImage = profileImage;
         this.password = password;
@@ -30,6 +47,8 @@ public class User {
         this.userId = userId;
         this.password = password;
     }
+
+
 
 
     public User(String email, String password){
@@ -69,12 +88,12 @@ public class User {
         this.email = email;
     }
 
-    public String getProfileImage() {
+    public Bitmap getProfileImage() {
         return profileImage;
     }
 
-    public void setProfileImage(String profileImage) {
-        this.profileImage = profileImage;
+    public static void setProfileImage(Bitmap profileImage) {
+        profileImage = profileImage;
     }
 
     public String getPassword() {

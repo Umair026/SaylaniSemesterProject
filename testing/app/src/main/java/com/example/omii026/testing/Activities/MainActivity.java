@@ -16,6 +16,7 @@ import android.widget.ImageView;
 
 
 import com.example.omii026.testing.Class.User;
+import com.example.omii026.testing.Firebase.FireBaseHandler;
 import com.example.omii026.testing.Fragments.Main_PagerAdapter;
 import com.example.omii026.testing.R;
 import com.firebase.client.Firebase;
@@ -47,6 +48,7 @@ public class MainActivity extends ActionBarActivity {
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         Main_PagerAdapter pagerAdapter = new Main_PagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
+
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

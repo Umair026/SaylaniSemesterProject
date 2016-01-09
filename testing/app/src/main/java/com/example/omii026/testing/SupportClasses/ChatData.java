@@ -1,5 +1,7 @@
 package com.example.omii026.testing.SupportClasses;
 
+import com.example.omii026.testing.MeApp;
+
 /**
  * Created by Omii026 on 9/11/2015.
  */
@@ -33,6 +35,9 @@ public class ChatData {
         this.msg = message;
         this.senderId = senderId;
         this.key = key;
+    }
+    public static boolean isUser(String senderId){
+        return senderId.equals(MeApp.getAppUser().getUserId());
     }
 
     public String getKey() {
